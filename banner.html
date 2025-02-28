@@ -13,55 +13,154 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="javascript.js"></script>
   </head>
   <body>
-    <!-- <header class="flex items-center justify-between p-6 bg-white shadow-md">
-      <img
-        src="/image/logo.jpg"
-        alt="logo"
-        class="w-12 h-12 rounded-full shadow-md cursor-pointer hover:scale-110 transform transition duration-500"
-      />
-      <nav>
-        <ul class="flex space-x-10">
-          <a
-            href="#"
-            class="text-gray-700 hover:text-gray-900 text-xl font-medium"
-            >Women</a
+    <header class="bg-gray-200 shadow-md">
+      <nav
+        class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div class="flex lg:flex-1">
+          <a href="#" class="-m-1.5 p-1.5">
+            <!-- <span class="sr-only">Your Company</span> -->
+            <img class="h-12 w-auto rounded-full" src="image/logo.jpg" alt="" />
+          </a>
+        </div>
+        <div class="flex lg:hidden justify-end items-center gap-x-4">
+          <a href="#" class="text-gray-500 hover:text-gray-900">
+            <i class="fas fa-search"></i>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-gray-900">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+          <button
+            id="menu-toggle"
+            type="button"
+            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
           >
-          <a
-            href="#"
-            class="text-gray-700 hover:text-gray-900 text-xl font-medium"
-            >Men</a
+            <span class="sr-only">Open main menu</span>
+            <i class="fas fa-bars text-2xl size-6"></i>
+          </button>
+        </div>
+        <div class="hidden lg:flex lg:gap-x-12">
+          <ul class="flex space-x-10 text-gray-700">
+            <li>
+              <a href="#" class="hover:text-gray-900 text-xl font-medium"
+                >Women</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-gray-900 text-xl font-medium"
+                >Men</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-gray-900 text-xl font-medium"
+                >Company</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-gray-900 text-xl font-medium"
+                >Stores</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          class="hidden lg:flex lg:flex-1 lg:justify-end items-center lg:gap-x-4"
+        >
+          <a href="#" class="text-gray-500 hover:text-gray-900">
+            <i class="fas fa-search"></i>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-gray-900">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-gray-900 font-medium"
+            >Sign In</a
           >
-          <a
-            href="#"
-            class="text-gray-700 hover:text-gray-900 text-xl font-medium"
-            >Company</a
+          <div class="h-6 w-px bg-gray-300"></div>
+          <a href="#" class="text-gray-500 hover:text-gray-900 font-medium"
+            >Sign Up</a
           >
-          <a
-            href="#"
-            class="text-gray-700 hover:text-gray-900 text-xl font-medium"
-            >Stores</a
-          >
-        </ul>
+        </div>
       </nav>
-      <div class="flex items-center space-x-4">
-        <a href="#" class="text-gray-500 hover:text-gray-900 font-medium">
-          Sign In
-        </a>
-        <div class="h-6 w-px bg-gray-300"></div>
-        <a href="#" class="text-gray-500 hover:text-gray-900 font-medium">
-          Sign Up
-        </a>
-        <a href="#" class="text-gray-500 hover:text-gray-900">
-          <i class="fas fa-search"></i>
-        </a>
-        <a href="#" class="text-gray-500 hover:text-gray-900">
-          <i class="fas fa-shopping-cart"> </i>
-        </a>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobile-menu"
+        class="hidden lg:hidden"
+        role="dialog"
+        aria-modal="true"
+      >
+        <div class="fixed inset-0 z-10 bg-black/30"></div>
+        <div
+          class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+        >
+          <div class="flex items-center justify-between">
+            <a href="#" class="-m-1.5 p-1.5">
+              <img
+                class="h-12 w-auto rounded-full"
+                src="image/logo.jpg"
+                alt=""
+              />
+            </a>
+            <button
+              type="button"
+              id="close-menu"
+              class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            >
+              <span class="sr-only">Close menu</span>
+              <i class="fas fa-times text-2xl size-6"></i>
+            </button>
+          </div>
+          <div class="mt-6 flow-root">
+            <div class="-my-6 divide-y divide-gray-500/10">
+              <div class="space-y-2 py-6">
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >Women</a
+                >
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >Men</a
+                >
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >Company</a
+                >
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >Stores</a
+                >
+              </div>
+              <div class="py-6">
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >Sign In</a
+                >
+                <a
+                  href="#"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  >Sign Up</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </header> -->
+    </header>
+
     <section class="relative w-full h-screen">
       <div class="swiper mySwiper w-full h-full">
         <div class="swiper-wrapper">
@@ -100,54 +199,92 @@
 
     <section class="px-6 py-12 bg-gray-50">
       <h2 class="text-2xl font-bold text-center">Shop by Category</h2>
-      <div class="max-w-6xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-4">
-          <img
-            src="https://storage.googleapis.com/a1aa/image/Ic_JBSG_eqjh6rAXVL3Z4Ka4N5K5PY8PfGcTcBYdcq4.jpg"
-            class="rounded-lg"
-          />
-          <h3 class="mt-4 font-semibold">New Arrivals</h3>
-          <button class="mt-2 text-blue-600">Shop now</button>
+      <div
+        class="max-w-6xl mx-auto mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center"
+      >
+        <div
+          class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition transform hover:scale-105"
+        >
+          <a href="#">
+            <img
+              src="https://storage.googleapis.com/a1aa/image/Ic_JBSG_eqjh6rAXVL3Z4Ka4N5K5PY8PfGcTcBYdcq4.jpg"
+              class="rounded-lg w-full h-auto object-cover"
+            />
+            <h3 class="mt-4 font-semibold">Yonex Astrox 99</h3>
+            <p class="price text-red-600 font-bold">1.000.000đ</p>
+          </a>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-4">
-          <img
-            src="https://source.unsplash.com/400x300/?accessories"
-            class="rounded-lg"
-          />
-          <h3 class="mt-4 font-semibold">Accessories</h3>
-          <button class="mt-2 text-blue-600">Shop now</button>
+        <div
+          class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition transform hover:scale-105"
+        >
+          <a href="#">
+            <img
+              src="https://storage.googleapis.com/a1aa/image/Ic_JBSG_eqjh6rAXVL3Z4Ka4N5K5PY8PfGcTcBYdcq4.jpg"
+              class="rounded-lg w-full h-auto object-cover"
+            />
+            <h3 class="mt-4 font-semibold">Yonex Astrox 99</h3>
+            <p class="price text-red-600 font-bold">1.000.000đ</p>
+          </a>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-4">
-          <img
-            src="https://source.unsplash.com/400x300/?workspace"
-            class="rounded-lg"
-          />
-          <h3 class="mt-4 font-semibold">Workspace</h3>
-          <button class="mt-2 text-blue-600">Shop now</button>
+        <div
+          class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition transform hover:scale-105"
+        >
+          <a href="#">
+            <img
+              src="https://storage.googleapis.com/a1aa/image/Ic_JBSG_eqjh6rAXVL3Z4Ka4N5K5PY8PfGcTcBYdcq4.jpg"
+              class="rounded-lg w-full h-auto object-cover"
+            />
+            <h3 class="mt-4 font-semibold">Yonex Astrox 99</h3>
+            <p class="price text-red-600 font-bold">1.000.000đ</p>
+          </a>
         </div>
       </div>
     </section>
-
+    <hr />
     <section class="px-6 py-12 bg-white">
       <h2 class="text-2xl font-bold text-center">Our Favorites</h2>
-      <div class="max-w-6xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="text-center">
-          <img src="image/banner_1.jpg-shirt" class="rounded-lg" />
-          <h3 class="mt-2 font-semibold">Black Basic Tee</h3>
-          <p class="text-gray-600">$32</p>
+      <div
+        class="max-w-6xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
+      >
+        <div
+          class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition transform hover:scale-105"
+        >
+          <a href="#">
+            <img
+              src="https://storage.googleapis.com/a1aa/image/Ic_JBSG_eqjh6rAXVL3Z4Ka4N5K5PY8PfGcTcBYdcq4.jpg"
+              class="rounded-lg"
+            />
+            <h3 class="mt-2 font-semibold">Black Basic Tee</h3>
+            <p class="text-red-600 font-bold">$32</p>
+          </a>
         </div>
-        <div class="text-center">
-          <img src="image/banner_1.jpg-shirt" class="rounded-lg" />
-          <h3 class="mt-2 font-semibold">Off-White Basic Tee</h3>
-          <p class="text-gray-600">$32</p>
+        <div
+          class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition transform hover:scale-105"
+        >
+          <a href="#">
+            <img
+              src="https://storage.googleapis.com/a1aa/image/Ic_JBSG_eqjh6rAXVL3Z4Ka4N5K5PY8PfGcTcBYdcq4.jpg"
+              class="rounded-lg"
+            />
+            <h3 class="mt-2 font-semibold">Off-White Basic Tee</h3>
+            <p class="text-red-600 font-bold">$32</p>
+          </a>
         </div>
-        <div class="text-center">
-          <img src="image/banner_1.jpg-shirt" class="rounded-lg" />
-          <h3 class="mt-2 font-semibold">Artwork Tee</h3>
-          <p class="text-gray-600">$36</p>
+        <div
+          class="bg-white rounded-lg shadow-lg p-4 hover:shadow-xl transition transform hover:scale-105"
+        >
+          <a href="#">
+            <img
+              src="https://storage.googleapis.com/a1aa/image/Ic_JBSG_eqjh6rAXVL3Z4Ka4N5K5PY8PfGcTcBYdcq4.jpg"
+              class="rounded-lg"
+            />
+            <h3 class="mt-2 font-semibold">Artwork Tee</h3>
+            <p class="text-red-600 font-bold">$36</p>
+          </a>
         </div>
       </div>
     </section>
+    <hr />
     <footer class="px-6 py-12">
       <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
         <div>
@@ -219,18 +356,5 @@
         </div>
       </div>
     </footer>
-    <script>
-      var swiper = new Swiper(".mySwiper", {
-        loop: true,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-      });
-    </script>
   </body>
 </html>
