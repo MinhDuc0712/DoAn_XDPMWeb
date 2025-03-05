@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
     />
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.46.0/dist/apexcharts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
@@ -210,80 +210,54 @@
 
     <div class="p-4 sm:ml-64">
       <div
-        class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700"
+        class="p-4 border-2 border-gray-200 border rounded-lg dark:border-gray-700"
       >
         <main class="flex-1 p-10">
-          <h1 class="text-3xl font-bold mb-6">Welcome to the Dashboard</h1>
+          <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
 
           <!-- Cards Section -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div class="bg-white p-6 shadow-md rounded-lg">
-              <h2 class="text-lg font-semibold mb-2">Total Sales</h2>
-              <p class="text-2xl font-bold">$12,345</p>
+              <h2 class="text-lg font-semibold mb-2">Tổng doanh thu</h2>
+              <p class="text-2xl font-bold">12,345 VNĐ</p>
             </div>
             <div class="bg-white p-6 shadow-md rounded-lg">
-              <h2 class="text-lg font-semibold mb-2">New Users</h2>
+              <h2 class="text-lg font-semibold mb-2">Tổng số thành viên</h2>
               <p class="text-2xl font-bold">1,234</p>
             </div>
             <div class="bg-white p-6 shadow-md rounded-lg">
-              <h2 class="text-lg font-semibold mb-2">Revenue</h2>
-              <p class="text-2xl font-bold">$7,890</p>
+              <h2 class="text-lg font-semibold mb-2">Tổng số hóa đơn</h2>
+              <p class="text-2xl font-bold">7,890</p>
             </div>
           </div>
 
           <!-- Chart Section -->
-          <div class="bg-white p-6 shadow-md rounded-lg">
-                <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Thống kê doanh thu theo tháng</h2>
-                <div class="relative h-96">
-                    <canvas id="revenueChart"></canvas>
-                </div>
+          <div class="bg-white shadow-md rounded-lg p-4 w-full sm:p-8">
+            <h2
+              class="text-lg sm:text-2xl font-bold text-gray-700 mb-4 sm:mb-6 text-center"
+            >
+              Thống kê doanh thu theo năm
+            </h2>
+            <div class="flex flex-col gap-4 mx-auto max-w-6xl text-center text-2xl">
+              <a
+                href="chart.html?year=2021"
+                class="p-4 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                >Doanh thu năm 2021</a
+              >
+              <a
+                href="chart.html?year=2022"
+                class="p-4 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                >Doanh thu năm 2022</a
+              >
+              <a
+                href="chart.html?year=2023"
+                class="p-4 bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                >Doanh thu năm 2023</a
+              >
+            </div>
           </div>
         </main>
       </div>
     </div>
-    <script>
-      const revenueData = {
-            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
-            datasets: [{
-                label: 'Doanh thu (VND)',
-                data: [1200000, 1500000, 800000, 1700000, 2200000, 1900000, 2500000, 2100000, 2300000, 2600000, 1800000, 3000000],
-                backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 2,
-                borderRadius: 5,
-                barPercentage: 0.8,
-            }]
-        };
-
-        const config = {
-            type: 'bar',
-            data: revenueData,
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return value.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            color: 'rgba(75, 85, 99, 1)'
-                        }
-                    }
-                }
-            }
-        };
-
-        new Chart(document.getElementById('revenueChart'), config);
-    </script>
   </body>
 </html>

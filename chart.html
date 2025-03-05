@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>CHART</title>
+  </head>
+  <body>
+    <div class="bg-white shadow-2xl rounded-2xl p-6 w-full mx-auto">
+      <h2 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">
+        Thống kê doanh năm
+      </h2>
+      <div class="relative h-80 mt-8" id="chartContainer">
+        <canvas id="revenueChart"></canvas>
+      </div>
+    </div>
+
+    <script>
+      const revenueDataByYear = {
+            2021: [500000, 700000, 800000, 1000000, 1200000, 1400000, 1600000, 1800000, 2000000, 2200000, 2400000, 2500000],
+            2022: [600000, 900000, 1000000, 1200000, 1500000, 1800000, 2000000, 2300000, 2500000, 2700000, 2900000, 3000000],
+            2023: [1200000, 1500000, 800000, 1700000, 2200000, 1900000, 2500000, 2100000, 2300000, 2600000, 1800000, 3000000],
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const year = urlParams.get('year');
+
+        const chart = new Chart(document.getElementById("revenueChart"), {
+            type: "bar",
+            data: {
+                labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"],
+                datasets: [{
+                    label: "Doanh thu (VND)",
+                    data: revenueDataByYear[year] || [],
+                    backgroundColor: "rgba(210,221,227, 0.5)",
+                    borderColor: "rgba(210,221,227, 1)",
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    barPercentage: 0.6,
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return value.toLocaleString("vi-VN", { style: "currency", currency: "VND" });
+                            },
+                        },
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "top",
+                    },
+                },
+            },
+        });
+    </script>
+  </body>
+</html>
