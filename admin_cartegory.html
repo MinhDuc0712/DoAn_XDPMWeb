@@ -219,6 +219,7 @@
         </ul>
       </div>
     </aside>
+    `
 
     <!-- Main content -->
     <main class="p-6 md:ml-64 bg-gray-50 dark:bg-gray-900 min-h-screen">
@@ -342,18 +343,16 @@
               </td>
               <td class="px-6 py-4 space-x-2">
                 <button
-                  data-modal-target="editCategoryModal"
-                  data-modal-toggle="editCategoryModal"
+                  onclick="editCategoryModal()"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  Sửa
+                  <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button
-                  data-modal-target="deleteCategoryModal"
-                  data-modal-toggle="deleteCategoryModal"
+                  onclick="deleteCategoryModal()"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
                 >
-                  Xóa
+                  <i class="fa-solid fa-trash-can"></i>
                 </button>
               </td>
             </tr>
@@ -376,18 +375,16 @@
               </td>
               <td class="px-6 py-4 space-x-2">
                 <button
-                  data-modal-target="editCategoryModal"
-                  data-modal-toggle="editCategoryModal"
+                  onclick="editCategoryModal()"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  Sửa
+                  <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button
-                  data-modal-target="deleteCategoryModal"
-                  data-modal-toggle="deleteCategoryModal"
+                  onclick="deleteCategoryModal()"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
                 >
-                  Xóa
+                  <i class="fa-solid fa-trash-can"></i>
                 </button>
               </td>
             </tr>
@@ -410,18 +407,16 @@
               </td>
               <td class="px-6 py-4 space-x-2">
                 <button
-                  data-modal-target="editCategoryModal"
-                  data-modal-toggle="editCategoryModal"
+                  onclick="editCategoryModal()"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  Sửa
+                  <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button
-                  data-modal-target="deleteCategoryModal"
-                  data-modal-toggle="deleteCategoryModal"
+                  onclick="deleteCategoryModal()"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
                 >
-                  Xóa
+                  <i class="fa-solid fa-trash-can"></i>
                 </button>
               </td>
             </tr>
@@ -444,18 +439,16 @@
               </td>
               <td class="px-6 py-4 space-x-2">
                 <button
-                  data-modal-target="editCategoryModal"
-                  data-modal-toggle="editCategoryModal"
+                  onclick="editCategoryModal()"
                   class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  Sửa
+                  <i class="fa-solid fa-pen-to-square"></i>
                 </button>
                 <button
-                  data-modal-target="deleteCategoryModal"
-                  data-modal-toggle="deleteCategoryModal"
+                  onclick="deleteCategoryModal()"
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
                 >
-                  Xóa
+                  <i class="fa-solid fa-trash-can"></i>
                 </button>
               </td>
             </tr>
@@ -484,7 +477,7 @@
                 type="text"
                 id="category-name"
                 name="category-name"
-                class="w-full p-2 mt-1 text-sm text-gray-800 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-blue-500 focus:border-blue-500"
+                class="w-full p-2 mt-1 text-sm text-gray-800 border border-gray-300 rounded-lg dark:text-white focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <!-- <div class="mb-4">
@@ -518,30 +511,120 @@
           </form>
         </div>
       </div>
+
+      <!-- Modal Sửa Danh Mục -->
+      <div
+        class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50"
+        id="editCategoryModal"
+      >
+        <div class="bg-white w-1/2 p-6 rounded-lg shadow-lg dark:bg-gray-800">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-4">
+            Sửa Danh Mục
+          </h3>
+          <form>
+            <div class="mb-4">
+              <label
+                for="category-name"
+                class="block text -sm font-medium text-gray-800 dark:text-gray-100"
+                >Tên danh mục</label
+              >
+              <input
+                type="text"
+                id="category-name"
+                name="category-name"
+                class="w-full p-2 mt-1 text-sm text-gray-800 border border-gray-300 rounded-lg dark:text-white focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div class="flex justify-end">
+              <button
+                type="button"
+                class="px-6 py-3 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition"
+                onclick="closeDetailModal()"
+              >
+                Hủy
+              </button>
+              <button
+                type="button"
+                class="ml-3 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
+                onclick="saveDetail()"
+              >
+                Lưu
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </main>
     <script>
+      // Hàm để chuyển đổi trạng thái hiển thị của modal
+      const toggleModal = (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+          modal.classList.toggle("hidden");
+        }
+      };
+    
+      // Các hàm để mở các modal cụ thể
       const addCategoryModal = () => {
-        const modal = document.getElementById("addCategoryModal");
-        modal.classList.toggle("hidden");
+        toggleModal("addCategoryModal");
       };
-
+    
       const editCategoryModal = () => {
-        const modal = document.getElementById("editCategoryModal");
-        modal.classList.toggle("hidden");
+        toggleModal("editCategoryModal");
       };
-
+    
       const deleteCategoryModal = () => {
-        const modal = document.getElementById("deleteCategoryModal");
-        modal.classList.toggle("hidden");
+        // Tạo hộp thoại xác nhận sử dụng hàm confirm có sẵn của trình duyệt
+        if (confirm("Bạn có chắc chắn muốn xóa danh mục này không?")) {
+          // Xử lý hành động xóa tại đây
+          alert("Đã xóa danh mục thành công");
+        }
       };
-
+    
+      // Đóng bất kỳ modal nào đang mở
+      const closeModal = (modalId) => {
+        toggleModal(modalId);
+      };
+    
+      // Xử lý các hành động lưu cho các biểu mẫu khác nhau
+      const saveCategory = (modalId) => {
+        // Thông thường bạn sẽ lấy dữ liệu biểu mẫu và xử lý nó tại đây
+        // Hiện tại, chỉ hiển thị thông báo thành công và đóng modal
+        alert("Đã lưu thông tin danh mục thành công");
+        toggleModal(modalId);
+      };
+    
+      // Lắng nghe sự kiện cho các nút đóng trong các modal
+      document.querySelectorAll('[data-modal-hide]').forEach(button => {
+        button.addEventListener('click', () => {
+          const modalId = button.getAttribute('data-modal-hide');
+          toggleModal(modalId);
+        });
+      });
+    
+      // Cập nhật các hàm đóng/lưu hiện có để sử dụng các hàm thống nhất mới
       const closeDetailModal = () => {
-        const modal = document.getElementById("addCategoryModal");
-        modal.classList.toggle("hidden");
+        // Trước tiên kiểm tra modal nào đang mở
+        const addModal = document.getElementById("addCategoryModal");
+        const editModal = document.getElementById("editCategoryModal");
+        
+        if (!addModal.classList.contains("hidden")) {
+          closeModal("addCategoryModal");
+        } else if (!editModal.classList.contains("hidden")) {
+          closeModal("editCategoryModal");
+        }
       };
+    
       const saveDetail = () => {
-        const modal = document.getElementById("addCategoryModal");
-        modal.classList.toggle("hidden");
+        // Trước tiên kiểm tra modal nào đang mở
+        const addModal = document.getElementById("addCategoryModal");
+        const editModal = document.getElementById("editCategoryModal");
+        
+        if (!addModal.classList.contains("hidden")) {
+          saveCategory("addCategoryModal");
+        } else if (!editModal.classList.contains("hidden")) {
+          saveCategory("editCategoryModal");
+        }
       };
     </script>
   </body>
