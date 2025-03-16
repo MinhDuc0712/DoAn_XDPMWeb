@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phân quyền</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <!-- Navigation tabs -->
+      <div class="mb-6 border-b border-gray-200">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
+          <li class="mr-2">
+            <button
+              onclick="showView('role-list', this)"
+              class="tab-button p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"
+            >
+              Roles
+            </button>
+          </li>
+          <li class="mr-2">
+            <button
+              onclick="showView('edit-role', this)"
+              class="tab-button p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"
+            >
+              Users
+            </button>
+          </li>
+          <li class="mr-2">
+            <button
+              onclick="showView('manage-users', this)"
+              class="tab-button p-4 border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300"
+            >
+              Claims
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Role List View -->
+      <div class="bg-white rounded-lg shadow mb-6" id="role-list">
+        <div
+          class="px-6 py-4 flex justify-between items-center border-b border-gray-200"
+        >
+          <h2 class="text-xl font-semibold text-gray-800">Role Management</h2>
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition duration-200 flex items-center"
+          >
+            <i class="fas fa-plus-circle mr-2"></i> Create New Role
+          </button>
+        </div>
+
+        <div class="divide-y divide-gray-200">
+          <div class="px-6 py-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div class="col-span-3 lg:col-span-1">
+                <p class="text-sm font-medium text-gray-500">Role ID</p>
+                <p class="mt-1 text-sm text-gray-900">
+                  52cd2d46-bfca-4196-b274-08dd63daa9a2
+                </p>
+              </div>
+              <div class="col-span-3 lg:col-span-1">
+                <p class="text-sm font-medium text-gray-500">Role Name</p>
+                <p class="mt-1 text-sm font-medium text-gray-900">Admin</p>
+              </div>
+              <div class="col-span-3 lg:col-span-1">
+                <p class="text-sm font-medium text-gray-500">Description</p>
+                <p class="mt-1 text-sm text-gray-900">Toàn quyền</p>
+              </div>
+            </div>
+            <div class="mt-4 flex space-x-3">
+              <button
+                onclick="document.getElementById('edit-role').style.display = 'block'; document.getElementById('role-list').style.display = 'none';"
+                class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm transition duration-200 flex items-center"
+              >
+                <i class="fas fa-edit mr-2"></i> Edit
+              </button>
+              <button
+                class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded text-sm transition duration-200 flex items-center"
+              >
+                <i class="fas fa-trash-alt mr-2"></i> Delete
+              </button>
+              <button
+                onclick="document.getElementById('manage-users').style.display = 'block'; document.getElementById('role-list').style.display = 'none';"
+                class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-sm transition duration-200 flex items-center"
+              >
+                <i class="fas fa-users mr-2"></i> Manage Users
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Role Form -->
+      <div class="bg-white rounded-lg shadow mb-6" id="create-role">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h2 class="text-xl font-semibold text-gray-800">Create New Role</h2>
+        </div>
+        <div class="p-6">
+          <form>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="roleName"
+                  class="block text-sm font-medium text-gray-700"
+                  >Role Name</label
+                >
+                <input
+                  type="text"
+                  id="roleName"
+                  name="roleName"
+                  placeholder="Enter role name"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  for="roleDescription"
+                  class="block text-sm font-medium text-gray-700"
+                  >Description</label
+                >
+                <input
+                  type="text"
+                  id="roleDescription"
+                  name="roleDescription"
+                  placeholder="Enter role description"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+              <div class="pt-4">
+                <button
+                  type="button"
+                  onclick="document.getElementById('create-role').style.display = 'block'; document.getElementById('create-role').style.display = 'none';"
+                  class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition duration-200 flex items-center"
+                >
+                  <i class="fas fa-save mr-2"></i> Create Role
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Edit Role Form -->
+      <div class="bg-white rounded-lg shadow mb-6" id="edit-role">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h2 class="text-xl font-semibold text-gray-800">Edit Role</h2>
+        </div>
+        <div class="p-6">
+          <form>
+            <div class="space-y-4">
+              <div>
+                <label
+                  for="roleId"
+                  class="block text-sm font-medium text-gray-700"
+                  >ID</label
+                >
+                <input
+                  type="text"
+                  id="roleId"
+                  name="roleId"
+                  value="52cd2d46-bfca-4196-b274-08dd63daa9a2"
+                  readonly
+                  class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm text-gray-500 sm:text-sm cursor-not-allowed"
+                />
+              </div>
+              <div>
+                <label
+                  for="editRoleName"
+                  class="block text-sm font-medium text-gray-700"
+                  >Role Name</label
+                >
+                <input
+                  type="text"
+                  id="editRoleName"
+                  name="editRoleName"
+                  value="Admin"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+              <div>
+                <label
+                  for="editRoleDescription"
+                  class="block text-sm font-medium text-gray-700"
+                  >Description</label
+                >
+                <input
+                  type="text"
+                  id="editRoleDescription"
+                  name="editRoleDescription"
+                  value="Toàn quyền"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+              <div class="pt-4 flex space-x-3">
+                <button
+                  type="submit"
+                  class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition duration-200 flex items-center"
+                >
+                  <i class="fas fa-save mr-2"></i> Update
+                </button>
+                <button
+                  type="button"
+                  onclick="cancel()"
+                  class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded transition duration-200 flex items-center"
+                >
+                  <i class="fas fa-times mr-2"></i> Cancel
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Users in this role section -->
+          <div class="mt-8">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">
+              Users in this role
+            </h3>
+            <div class="border border-gray-200 rounded-md">
+              <div class="p-4 border-b border-gray-200">
+                <div class="flex items-center">
+                  <i class="fas fa-user text-blue-500 mr-2"></i>
+                  <span>TrongDat</span>
+                </div>
+              </div>
+              <div class="p-4">
+                <button
+                  onclick="document.getElementById('manage-users').style.display = 'block'; document.getElementById('edit-role').style.display = 'none';"
+                  class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition duration-200 flex items-center justify-center"
+                >
+                  <i class="fas fa-user-plus mr-2"></i> Add or Remove Users From
+                  This Role
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Role Management -->
+      <div class="bg-white rounded-lg shadow" id="manage-users">
+        <div class="px-6 py-4 border-b border-gray-200">
+          <h2 class="text-xl font-semibold text-gray-800">Role: Admin</h2>
+          <p class="mt-1 text-sm text-gray-500">
+            Add or Remove Users From This Role
+          </p>
+        </div>
+        <div class="p-6">
+          <div
+            class="max-h-64 overflow-y-auto border border-gray-200 rounded-md mb-6"
+          >
+            <div class="p-4 hover:bg-gray-50 flex items-center">
+              <input
+                type="checkbox"
+                id="user-trongdat"
+                name="user-trongdat"
+                checked
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label
+                for="user-trongdat"
+                class="ml-3 block text-sm font-medium text-gray-700"
+                >TrongDat</label
+              >
+            </div>
+            <div
+              class="p-4 hover:bg-gray-50 flex items-center border-t border-gray-200"
+            >
+              <input
+                type="checkbox"
+                id="user-another"
+                name="user-another"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label
+                for="user-another"
+                class="ml-3 block text-sm font-medium text-gray-700"
+                >Another User</label
+              >
+            </div>
+            <div
+              class="p-4 hover:bg-gray-50 flex items-center border-t border-gray-200"
+            >
+              <input
+                type="checkbox"
+                id="user-third"
+                name="user-third"
+                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              />
+              <label
+                for="user-third"
+                class="ml-3 block text-sm font-medium text-gray-700"
+                >Third User</label
+              >
+            </div>
+          </div>
+          <div class="flex space-x-3">
+            <button
+              type="submit"
+              class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition duration-200 flex items-center"
+            >
+              <i class="fas fa-save mr-2"></i> Update
+            </button>
+            <button
+              type="button"
+              onclick="cancel()"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded transition duration-200 flex items-center"
+            >
+              <i class="fas fa-times mr-2"></i> Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        showView("role-list", document.querySelector(".tab-button")); // Mặc định hiển thị danh sách Roles
+      });
+    
+      function showView(viewId, button = null) {
+        const views = ["role-list", "create-role", "edit-role", "manage-users", "user-list", "claims-list"];
+    
+        // Ẩn tất cả các view
+        views.forEach((view) => {
+          let element = document.getElementById(view);
+          if (element) {
+            element.style.display = view === viewId ? "block" : "none";
+          }
+        });
+    
+        // Xóa class active của tất cả các tab
+        document.querySelectorAll(".tab-button").forEach((btn) => {
+          btn.classList.remove("border-blue-500", "text-blue-600");
+          btn.classList.add("border-transparent", "hover:text-gray-600", "hover:border-gray-300");
+        });
+    
+        // Gán class active cho tab được chọn
+        if (button) {
+          button.classList.add("border-blue-500", "text-blue-600");
+          button.classList.remove("border-transparent", "hover:text-gray-600", "hover:border-gray-300");
+        }
+      }
+    
+      function cancel() {
+        showView("role-list");
+      }
+    </script>
+    
+  </body>
+</html>
