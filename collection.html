@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collection Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <header class="bg-gray-200 shadow-md">
+    <nav
+      class="mx-auto flex items-center justify-between p-6 lg:px-8"
+      aria-label="Global"
+    >
+      <div class="flex lg:flex-1">
+        <a href="#" class="-m-1.5 p-1.5">
+          <!-- <span class="sr-only">Your Company</span> -->
+          <img class="h-12 w-auto rounded-full" src="image/logo.jpg" alt="" />
+        </a>
+      </div>
+      <div class="flex lg:hidden justify-end items-center gap-x-4">
+        <a href="#" class="text-gray-500 hover:text-gray-900">
+          <i class="fas fa-search"></i>
+        </a>
+        <a href="#" class="text-gray-500 hover:text-gray-900">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        <button
+          id="menu-toggle"
+          type="button"
+          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+        >
+          <span class="sr-only">Open main menu</span>
+          <i class="fas fa-bars text-2xl size-6"></i>
+        </button>
+      </div>
+      <div class="hidden lg:flex lg:gap-x-12">
+        <ul class="flex space-x-10 text-gray-700">
+          <li>
+            <a href="#" class="hover:text-gray-900 text-xl font-medium"
+              >Women</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-gray-900 text-xl font-medium">Men</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-gray-900 text-xl font-medium"
+              >Company</a
+            >
+          </li>
+          <li>
+            <a href="#" class="hover:text-gray-900 text-xl font-medium"
+              >Stores</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div
+        class="hidden lg:flex lg:flex-1 lg:justify-end items-center lg:gap-x-4"
+      >
+        <a href="#" class="text-gray-500 hover:text-gray-900">
+          <i class="fas fa-search"></i>
+        </a>
+        <a href="#" class="text-gray-500 hover:text-gray-900">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        <a href="#" class="text-gray-500 hover:text-gray-900 font-medium"
+          >Sign In</a
+        >
+        <div class="h-6 w-px bg-gray-300"></div>
+        <a href="#" class="text-gray-500 hover:text-gray-900 font-medium"
+          >Sign Up</a
+        >
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden lg:hidden"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="fixed inset-0 z-10 bg-black/30"></div>
+      <div
+        class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+      >
+        <div class="flex items-center justify-between">
+          <a href="#" class="-m-1.5 p-1.5">
+            <img class="h-12 w-auto rounded-full" src="image/logo.jpg" alt="" />
+          </a>
+          <button
+            type="button"
+            id="close-menu"
+            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          >
+            <span class="sr-only">Close menu</span>
+            <i class="fas fa-times text-2xl size-6"></i>
+          </button>
+        </div>
+        <div class="mt-6 flow-root">
+          <div class="-my-6 divide-y divide-gray-500/10">
+            <div class="space-y-2 py-6">
+              <a
+                href="#"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >Women</a
+              >
+              <a
+                href="#"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >Men</a
+              >
+              <a
+                href="#"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >Company</a
+              >
+              <a
+                href="#"
+                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >Stores</a
+              >
+            </div>
+            <div class="py-6">
+              <a
+                href="#"
+                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >Sign In</a
+              >
+              <a
+                href="#"
+                class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >Sign Up</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Collection Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-3xl font-bold mb-4 tracking-wider text-gray-800">
+        ALL ITEMS
+      </h1>
+      <p class="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed">
+        Những thiết kế lưu giữ nét đặc trưng của MAVEN. Vẻ đẹp nữ tính và thanh
+        lịch trong từng sản phẩm hòa cùng nét tinh tế và sang trọng chính là các
+        từ khóa mà MAVEN gửi gắm vào từng bộ trang phục.
+      </p>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="flex flex-wrap justify-center mb-10 gap-3">
+      <button
+        class="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-150 flex items-center gap-2 text-gray-700"
+      >
+        BROWSE
+        <i class="fas fa-chevron-down text-xs"></i>
+      </button>
+      <button
+        class="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-150 flex items-center gap-2 text-gray-700"
+      >
+        SORT BY
+        <i class="fas fa-chevron-down text-xs"></i>
+      </button>
+      <button
+        class="px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition duration-150 flex items-center gap-2 text-gray-700"
+      >
+        REFINE
+        <i class="fas fa-sliders-h text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Product Grid -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      <!-- Product 1 -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-cover object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 text-xs font-medium"
+          >
+            10%
+          </div>
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-cover object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 text-xs font-medium"
+          >
+            12%
+          </div>
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-cover object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-cover object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-cover object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-cover object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-cover object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+
+      <!-- Product 8 (Added one more to balance the grid) -->
+      <div class="group">
+        <div class="relative overflow-hidden">
+          <img
+            src="image/DSC03873.webp"
+            alt="Luna Pants"
+            class="w-full h-96 object-overflow object-center group-hover:scale-105 transition duration-300"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+          >
+            <button
+              class="bg-white text-gray-800 px-4 py-2 font-medium transform -translate-y-2 group-hover:translate-y-0 transition duration-300"
+            >
+              Quick View
+            </button>
+          </div>
+        </div>
+        <div class="pt-4 pb-6">
+          <h3 class="text-gray-800 font-medium">Luna Pants</h3>
+          <p class="text-gray-700 mt-1">1.050.000₫</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer class="px-6 py-12">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div>
+        <h3 class="font-bold text-gray-700 hover:text-black">Shop</h3>
+        <ul>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Women</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Men</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Company</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Stores</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold text-gray-700 hover:text-black">Legal</h3>
+        <ul>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Privacy</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Terms</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Shipping</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Returns</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold text-gray-700 hover:text-black">Connect</h3>
+        <ul>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Contact Us</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Twitter</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Instagram</a>
+          </li>
+          <li>
+            <a href="#" class="text-gray-500 hover:text-black">Facebook</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-black font-medium">Sign up for the newsletter</h3>
+        <form class="mt-4">
+          <input
+            type="email"
+            class="w-full px-4 py-2 border border-gray-300 rounded-md"
+            placeholder="Email"
+          />
+          <button
+            class="w-full py-2 mt-2 bg-gray-700 text-white rounded-md"
+            type="submit"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </footer>
+</html>
