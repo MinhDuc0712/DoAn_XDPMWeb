@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử Đơn Hàng Chi Tiết</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .order-detail {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .order-detail.show {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Lịch Sử Đơn Hàng</h1>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input type="text" placeholder="Tìm kiếm đơn hàng..." 
+                           class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                    Lọc
+                </button>
+            </div>
+        </div>
+
+        <!-- Order List -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <!-- Order Table Header -->
+            <div class="grid grid-cols-12 bg-gray-100 p-4 font-semibold text-gray-700">
+                <div class="col-span-2">Mã Đơn Hàng</div>
+                <div class="col-span-2">Ngày Đặt</div>
+                <div class="col-span-2">Tổng Tiền</div>
+                <div class="col-span-2">Số Lượng SP</div>
+                <div class="col-span-2">Trạng Thái</div>
+                <div class="col-span-2">Thao Tác</div>
+            </div>
+
+            <!-- Order Items Container -->
+            <div id="orders-container">
+                <!-- Orders will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-between items-center mt-6">
+            <div id="order-count" class="text-gray-600">
+                <!-- Order count will be inserted here -->
+            </div>
+            <div class="flex space-x-2">
+                <button id="prev-page" class="px-4 py-2 border rounded-lg bg-white text-gray-700 hover:bg-gray-50">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="px-4 py-2 border rounded-lg bg-blue-600 text-white">
+                    1
+                </button>
+                <button class="px-4 py-2 border rounded-lg bg-white text-gray-700 hover:bg-gray-50">
+                    2
+                </button>
+                <button class="px-4 py-2 border rounded-lg bg-white text-gray-700 hover:bg-gray-50">
+                    3
+                </button>
+                <button id="next-page" class="px-4 py-2 border rounded-lg bg-white text-gray-700 hover:bg-gray-50">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for orders and order details
+        const orders = [
+            {
+                bill_id: "DH123456",
+                date: "15/03/2023",
+                total: "1,250,000₫",
+                status: {
+                    text: "Đã giao",
+                    bg: "bg-green-100",
+                    textColor: "text-green-800"
+                },
+                canReorder: true
+            },
+            {
+                bill_id: "DH123455",
+                date: "10/03/2023",
+                total: "850,000₫",
+                status: {
+                    text: "Đang giao",
+                    bg: "bg-yellow-100",
+                    textColor: "text-yellow-800"
+                },
+                canReorder: false
+            }
+        ];
+
+        const orderDetails = [
+            // Order details for DH123456
+            {
+                Id: 1,
+                bill_id: "DH123456",
+                product_id: "SP001",
+                product_name: "Áo thun nam",
+                quantity: 2,
+                Price: "250,000₫",
+                Cata_product: "Thời trang nam",
+                Size: "L",
+                image: "https://via.placeholder.com/80"
+            },
+            {
+                Id: 2,
+                bill_id: "DH123456",
+                product_id: "SP002",
+                product_name: "Quần jean",
+                quantity: 1,
+                Price: "750,000₫",
+                Cata_product: "Thời trang nam",
+                Size: "32",
+                image: "https://via.placeholder.com/80"
+            },
+            // Order details for DH123455
+            {
+                Id: 3,
+                bill_id: "DH123455",
+                product_id: "SP003",
+                product_name: "Váy đầm",
+                quantity: 1,
+                Price: "850,000₫",
+                Cata_product: "Thời trang nữ",
+                Size: "M",
+                image: "https://via.placeholder.com/80"
+            }
+        ];
+
+        // Function to render orders with details
+        function renderOrders() {
+            const ordersContainer = document.getElementById('orders-container');
+            ordersContainer.innerHTML = '';
+
+            orders.forEach(order => {
+                // Get order details for this order
+                const details = orderDetails.filter(detail => detail.bill_id === order.bill_id);
+                const productCount = details.length;
+
+                // Create order element
+                const orderElement = document.createElement('div');
+                orderElement.className = 'border-b border-gray-200';
+                
+                // Order summary
+                const orderSummary = document.createElement('div');
+                orderSummary.className = 'grid grid-cols-12 p-4 items-center hover:bg-gray-50 transition cursor-pointer';
+                orderSummary.innerHTML = `
+                    <div class="col-span-2 font-medium text-blue-600">#${order.bill_id}</div>
+                    <div class="col-span-2 text-gray-600">${order.date}</div>
+                    <div class="col-span-2 font-medium">${order.total}</div>
+                    <div class="col-span-2 text-gray-600">${productCount} sản phẩm</div>
+                    <div class="col-span-2">
+                        <span class="px-3 py-1 rounded-full text-sm font-medium ${order.status.bg} ${order.status.textColor}">
+                            ${order.status.text}
+                        </span>
+                    </div>
+                    <div class="col-span-2 flex space-x-2">
+                        <button class="text-blue-600 hover:text-blue-800 view-btn" data-id="${order.bill_id}">
+                            <i class="fas fa-eye"></i> Xem
+                        </button>
+                        <button class="text-gray-600 hover:text-gray-800 print-btn" data-id="${order.bill_id}">
+                            <i class="fas fa-print"></i> In
+                        </button>
+                    </div>
+                `;
+                
+                // Order details
+                const orderDetail = document.createElement('div');
+                orderDetail.className = 'order-detail bg-gray-50';
+                orderDetail.id = `detail-${order.bill_id}`;
+                
+                // Create table for order details
+                orderDetail.innerHTML = `
+                    <div class="p-4">
+                        <h3 class="font-semibold mb-3">Chi tiết đơn hàng</h3>
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Sản phẩm</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Danh mục</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Size</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Số lượng</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Đơn giá</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="detail-body-${order.bill_id}">
+                                <!-- Details will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                
+                // Add click event to toggle details
+                orderSummary.addEventListener('click', function() {
+                    document.getElementById(`detail-${order.bill_id}`).classList.toggle('show');
+                });
+
+                // Append elements
+                orderElement.appendChild(orderSummary);
+                orderElement.appendChild(orderDetail);
+                ordersContainer.appendChild(orderElement);
+
+                // Render order details
+                renderOrderDetails(order.bill_id, details);
+            });
+
+            // Update order count
+            document.getElementById('order-count').textContent = `Hiển thị 1-${orders.length} của ${orders.length} đơn hàng`;
+        }
+
+        // Function to render order details
+        function renderOrderDetails(billId, details) {
+            const detailBody = document.getElementById(`detail-body-${billId}`);
+            detailBody.innerHTML = '';
+
+            details.forEach(detail => {
+                const total = parseInt(detail.Price.replace(/\D/g, '')) * detail.quantity;
+                const totalFormatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total).replace('₫', '') + '₫';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-10 w-10">
+                                <img class="h-10 w-10 rounded-full" src="${detail.image}" alt="${detail.product_name}">
+                            </div>
+                            <div class="ml-4">
+                                <div class="text-sm font-medium text-gray-900">${detail.product_name}</div>
+                                <div class="text-sm text-gray-500">${detail.product_id}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${detail.Cata_product}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${detail.Size}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${detail.quantity}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${detail.Price}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${totalFormatted}</td>
+                `;
+                detailBody.appendChild(row);
+            });
+        }
+
+        // Function to handle button clicks
+        function setupEventListeners() {
+            // View button click
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('view-btn') || e.target.closest('.view-btn')) {
+                    const btn = e.target.classList.contains('view-btn') ? e.target : e.target.closest('.view-btn');
+                    const orderId = btn.getAttribute('data-id');
+                    alert(`Xem chi tiết đơn hàng: ${orderId}`);
+                    // In a real app, you would redirect to order detail page or show a modal
+                    e.stopPropagation(); // Prevent toggling the detail section
+                }
+
+                // Print button click
+                if (e.target.classList.contains('print-btn') || e.target.closest('.print-btn')) {
+                    const btn = e.target.classList.contains('print-btn') ? e.target : e.target.closest('.print-btn');
+                    const orderId = btn.getAttribute('data-id');
+                    alert(`In đơn hàng: ${orderId}`);
+                    // In a real app, you would open print dialog or generate PDF
+                    e.stopPropagation(); // Prevent toggling the detail section
+                }
+
+                // Pagination buttons
+                if (e.target.id === 'prev-page' || e.target.closest('#prev-page')) {
+                    alert('Chuyển trang trước');
+                    // In a real app, you would load previous page data
+                }
+
+                if (e.target.id === 'next-page' || e.target.closest('#next-page')) {
+                    alert('Chuyển trang sau');
+                    // In a real app, you would load next page data
+                }
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderOrders();
+            setupEventListeners();
+        });
+    </script>
+</body>
+</html>

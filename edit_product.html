@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết sản phẩm</title>
+
+    <!-- Flowbite -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <!-- Tailwind -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Mobile nav toggle -->
+    <button
+      data-drawer-target="default-sidebar"
+      data-drawer-toggle="default-sidebar"
+      aria-controls="default-sidebar"
+      type="button"
+      class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+    >
+      <span class="sr-only">Open sidebar</span>
+      <svg
+        class="w-6 h-6"
+        aria-hidden="true"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          fill-rule="evenodd"
+          d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Sidebar -->
+    <aside
+      id="default-sidebar"
+      class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+      aria-label="Sidebar"
+    >
+      <div
+        class="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200"
+      >
+        <div class="flex items-center justify-center mb-5">
+          <img src="/api/placeholder/160/40" alt="Logo" class="h-8" />
+        </div>
+        <ul class="space-y-2 font-medium">
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <svg
+                class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 22 21"
+              >
+                <path
+                  d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z"
+                />
+                <path
+                  d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z"
+                />
+              </svg>
+              <span class="ms-3">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 18"
+              >
+                <path
+                  d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Kanban</span>
+              <span
+                class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full"
+                >Pro</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
+              <span
+                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full"
+                >3</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 18"
+              >
+                <path
+                  d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >Quản lý người dùng</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg bg-gray-100 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-900"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 20"
+              >
+                <path
+                  d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >Quản lý sản phẩm</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 18 18"
+              >
+                <path
+                  d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap"
+                >Quản lý danh mục</span
+              >
+            </a>
+          </li>
+          <hr class="my-2 border-gray-200" />
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <svg
+                class="shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 18 16"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
+                />
+              </svg>
+              <span class="flex-1 ms-3 whitespace-nowrap">Đăng xuất</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="p-6 sm:ml-64 bg-gray-50 min-h-screen">
+      <!-- Main content -->
+      <div class="flex flex-col flex-1 overflow-hidden">
+        <!-- Top header -->
+        <header class="bg-white shadow-sm z-10">
+          <div
+            class="px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center"
+          >
+            <h1 class="text-xl font-semibold text-gray-800">
+              Chi tiết sản phẩm
+            </h1>
+            <div class="flex items-center space-x-4">
+              <button class="p-2 text-gray-500 rounded-full hover:bg-gray-100">
+                <i class="fas fa-bell"></i>
+              </button>
+              <button
+                class="md:hidden p-2 text-gray-500 rounded-full hover:bg-gray-100"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Breadcrumbs -->
+        <div class="bg-white p-4 shadow-sm">
+          <div class="flex items-center text-sm">
+            <a href="#" class="text-blue-600 hover:underline"
+              >Quản lý sản phẩm</a
+            >
+            <span class="mx-2 text-gray-500">/</span>
+            <span class="text-gray-700">Chi tiết sản phẩm</span>
+          </div>
+        </div>
+
+        <!-- Page content -->
+        <main class="flex-1 overflow-y-auto p-4 bg-gray-100">
+          <!-- Product Info Section -->
+          <div class="bg-white rounded-lg shadow-sm mb-6">
+            <div class="p-6 border-b border-gray-200">
+              <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">
+                  Thông tin sản phẩm
+                </h2>
+                <div class="flex space-x-2">
+                  <button
+                    id="editButton"
+                    class="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition"
+                    onclick="toggleEditMode()"
+                  >
+                    <i class="fas fa-edit"></i>
+                    <span>Sửa thông tin</span>
+                  </button>
+                  <button
+                    id="saveButton"
+                    class="px-4 py-2 bg-green-600 text-white rounded-lg flex items-center justify-center space-x-2 hover:bg-green-700 transition hidden"
+                    onclick="saveChanges()"
+                  >
+                    <i class="fas fa-save"></i>
+                    <span>Lưu thay đổi</span>
+                  </button>
+                  <button
+                    id="cancelButton"
+                    class="px-4 py-2 bg-gray-500 text-white rounded-lg flex items-center justify-center space-x-2 hover:bg-gray-600 transition hidden"
+                    onclick="cancelEdit()"
+                  >
+                    <i class="fas fa-times"></i>
+                    <span>Hủy</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Product info grid -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Left column - Product Image -->
+                <div class="md:col-span-1">
+                  <div class="bg-gray-100 rounded-lg p-2 mb-4">
+                    <img
+                      id="mainProductImage"
+                      src="/api/placeholder/400/400"
+                      alt="Product"
+                      class="w-full h-64 md:h-80 object-cover rounded-lg"
+                    />
+                  </div>
+                  <div class="grid grid-cols-4 gap-2">
+                    <div
+                      class="bg-gray-100 rounded-lg p-1 cursor-pointer border-2 border-blue-500"
+                    >
+                      <img
+                        src="/api/placeholder/100/100"
+                        alt="Thumbnail 1"
+                        class="w-full h-16 object-cover rounded-lg"
+                        onclick="changeMainImage(this.src)"
+                      />
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-1 cursor-pointer">
+                      <img
+                        src="/api/placeholder/100/100"
+                        alt="Thumbnail 2"
+                        class="w-full h-16 object-cover rounded-lg"
+                        onclick="changeMainImage(this.src)"
+                      />
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-1 cursor-pointer">
+                      <img
+                        src="/api/placeholder/100/100"
+                        alt="Thumbnail 3"
+                        class="w-full h-16 object-cover rounded-lg"
+                        onclick="changeMainImage(this.src)"
+                      />
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-1 cursor-pointer">
+                      <button
+                        class="w-full h-16 bg-gray-200 rounded-lg flex items-center justify-center text-gray-600 hover:bg-gray-300"
+                        onclick="openImageModal()"
+                      >
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Middle column - Product Details -->
+                <div class="md:col-span-2">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Product name and basic info -->
+                    <div class="md:col-span-2">
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Tên sản phẩm
+                        </label>
+                        <h3
+                          id="productNameDisplay"
+                          class="text-2xl font-bold text-gray-900 view-mode"
+                        >
+                          Yuri Flower Top
+                        </h3>
+                        <input
+                          type="text"
+                          id="productNameInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                          value="Yuri Flower Top"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Product basic details -->
+                    <div>
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Mã sản phẩm
+                        </label>
+                        <p
+                          id="productCodeDisplay"
+                          class="text-gray-800 view-mode"
+                        >
+                          SP001
+                        </p>
+                        <input
+                          type="text"
+                          id="productCodeInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                          value="SP001"
+                        />
+                      </div>
+
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Thương hiệu
+                        </label>
+                        <p id="brandDisplay" class="text-gray-800 view-mode">
+                          Yuri
+                        </p>
+                        <input
+                          type="text"
+                          id="brandInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                          value="Yuri"
+                        />
+                      </div>
+
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Danh mục
+                        </label>
+                        <p id="categoryDisplay" class="text-gray-800 view-mode">
+                          Áo
+                        </p>
+                        <select
+                          id="categoryInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                        >
+                          <option value="ao" selected>Áo</option>
+                          <option value="quan">Quần</option>
+                          <option value="vay">Váy</option>
+                          <option value="dam">Đầm</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Product price and status details -->
+                    <div>
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Giá bán
+                        </label>
+                        <div class="view-mode">
+                          <p
+                            id="priceDisplay"
+                            class="text-xl font-semibold text-gray-900"
+                          >
+                            1.200.000₫
+                          </p>
+                          <p
+                            id="oldPriceDisplay"
+                            class="text-sm text-red-500 line-through"
+                          >
+                            1.500.000₫
+                          </p>
+                        </div>
+                        <div class="flex gap-2 edit-mode hidden">
+                          <input
+                            type="number"
+                            id="priceInput"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            value="1200000"
+                            placeholder="Giá bán"
+                          />
+                          <input
+                            type="number"
+                            id="oldPriceInput"
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            value="1500000"
+                            placeholder="Giá gốc"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Giảm giá
+                        </label>
+                        <p id="discountDisplay" class="text-gray-800 view-mode">
+                          10%
+                        </p>
+                        <input
+                          type="number"
+                          id="discountInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                          value="10"
+                          min="0"
+                          max="100"
+                        />
+                      </div>
+
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Trạng thái
+                        </label>
+                        <div class="view-mode">
+                          <span
+                            id="statusDisplay"
+                            class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800"
+                          >
+                            Còn hàng
+                          </span>
+                        </div>
+                        <select
+                          id="statusInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                        >
+                          <option value="instock" selected>Còn hàng</option>
+                          <option value="outofstock">Hết hàng</option>
+                          <option value="pending">Đang nhập hàng</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Product description -->
+                    <div class="md:col-span-2">
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Mô tả sản phẩm
+                        </label>
+                        <p
+                          id="descriptionDisplay"
+                          class="text-gray-700 view-mode"
+                        >
+                          Áo kiểu Yuri Flower Top với họa tiết hoa độc đáo, chất
+                          liệu vải cao cấp, form dáng thoải mái phù hợp với
+                          nhiều dáng người. Sản phẩm phù hợp cho các dịp đi
+                          chơi, dạo phố hoặc đi làm.
+                        </p>
+                        <textarea
+                          id="descriptionInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                          rows="4"
+                        >
+Áo kiểu Yuri Flower Top với họa tiết hoa độc đáo, chất liệu vải cao cấp, form dáng thoải mái phù hợp với nhiều dáng người. Sản phẩm phù hợp cho các dịp đi chơi, dạo phố hoặc đi làm.</textarea
+                        >
+                      </div>
+                    </div>
+
+                    <!-- Product highlights -->
+                    <div class="md:col-span-2">
+                      <div class="mb-4">
+                        <label
+                          class="block text-sm font-medium text-gray-700 mb-1"
+                        >
+                          Đặc điểm nổi bật
+                        </label>
+                        <div id="highlightDisplay" class="view-mode">
+                          <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>Chất liệu: 100% cotton cao cấp</li>
+                            <li>Họa tiết hoa độc đáo</li>
+                            <li>Kiểu dáng: Tay ngắn, cổ tròn</li>
+                            <li>Xuất xứ: Việt Nam</li>
+                          </ul>
+                        </div>
+                        <textarea
+                          id="highlightInput"
+                          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                          rows="4"
+                        >
+                        Chất liệu: 100% cotton cao cấp
+                        Họa tiết hoa độc đáo
+                        Kiểu dáng: Tay ngắn, cổ tròn
+                        Xuất xứ: Việt Nam
+                        </textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inventory Section -->
+          <div class="bg-white rounded-lg shadow-sm mb-6">
+            <div class="p-6 border-b border-gray-200">
+              <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold text-gray-800">
+                  Thông tin tồn kho
+                </h2>
+                <button
+                  class="px-4 py-2 bg-blue-600 text-white rounded-lg flex items-center justify-center space-x-2 hover:bg-blue-700 transition"
+                  onclick="openInventoryModal()"
+                >
+                  <i class="fas fa-plus"></i>
+                  <span>Thêm hàng tồn kho</span>
+                </button>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="mb-4">
+                  <label class="block text-sm font-medium text-gray-700 mb-1">
+                    Số lượng tồn kho
+                  </label>
+                  <p id="stockDisplay" class="text-gray-800 view-mode">100</p>
+                  <input
+                    type="number"
+                    id="stockInput"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 edit-mode hidden"
+                    value="100"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!-- Edit Product Modal -->
+<div id="editProductModal" class="hidden fixed inset-0 overflow-y-auto z-50">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <!-- Background overlay -->
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+  
+      <!-- Modal content -->
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+              <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                Sửa thông tin sản phẩm
+              </h3>
+              
+              <!-- Form fields -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Product Name -->
+                <div class="md:col-span-2">
+                  <label for="modalProductName" class="block text-sm font-medium text-gray-700">Tên sản phẩm</label>
+                  <input type="text" id="modalProductName" class="mt-1 p-2 w-full border border-gray-300 rounded-md" value="Yuri Flower Top">
+                </div>
+                
+                <!-- Product Code -->
+                <div>
+                  <label for="modalProductCode" class="block text-sm font-medium text-gray-700">Mã sản phẩm</label>
+                  <input type="text" id="modalProductCode" class="mt-1 p-2 w-full border border-gray-300 rounded-md" value="SP001">
+                </div>
+                
+                <!-- Brand -->
+                <div>
+                  <label for="modalBrand" class="block text-sm font-medium text-gray-700">Thương hiệu</label>
+                  <input type="text" id="modalBrand" class="mt-1 p-2 w-full border border-gray-300 rounded-md" value="Yuri">
+                </div>
+                
+                <!-- Category -->
+                <div>
+                  <label for="modalCategory" class="block text-sm font-medium text-gray-700">Danh mục</label>
+                  <select id="modalCategory" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    <option value="ao" selected>Áo</option>
+                    <option value="quan">Quần</option>
+                    <option value="vay">Váy</option>
+                    <option value="dam">Đầm</option>
+                  </select>
+                </div>
+                
+                <!-- Price -->
+                <div>
+                  <label for="modalPrice" class="block text-sm font-medium text-gray-700">Giá bán</label>
+                  <input type="number" id="modalPrice" class="mt-1 p-2 w-full border border-gray-300 rounded-md" value="1200000">
+                </div>
+                
+                <!-- Old Price -->
+                <div>
+                  <label for="modalOldPrice" class="block text-sm font-medium text-gray-700">Giá gốc</label>
+                  <input type="number" id="modalOldPrice" class="mt-1 p-2 w-full border border-gray-300 rounded-md" value="1500000">
+                </div>
+                
+                <!-- Discount -->
+                <div>
+                  <label for="modalDiscount" class="block text-sm font-medium text-gray-700">Giảm giá (%)</label>
+                  <input type="number" id="modalDiscount" class="mt-1 p-2 w-full border border-gray-300 rounded-md" value="10" min="0" max="100">
+                </div>
+                
+                <!-- Status -->
+                <div>
+                  <label for="modalStatus" class="block text-sm font-medium text-gray-700">Trạng thái</label>
+                  <select id="modalStatus" class="mt-1 p-2 w-full border border-gray-300 rounded-md">
+                    <option value="instock" selected>Còn hàng</option>
+                    <option value="outofstock">Hết hàng</option>
+                    <option value="pending">Đang nhập hàng</option>
+                  </select>
+                </div>
+                
+                <!-- Stock -->
+                <div>
+                  <label for="modalStock" class="block text-sm font-medium text-gray-700">Số lượng tồn kho</label>
+                  <input type="number" id="modalStock" class="mt-1 p-2 w-full border border-gray-300 rounded-md" value="100">
+                </div>
+                
+                <!-- Description -->
+                <div class="md:col-span-2">
+                  <label for="modalDescription" class="block text-sm font-medium text-gray-700">Mô tả sản phẩm</label>
+                  <textarea id="modalDescription" rows="3" class="mt-1 p-2 w-full border border-gray-300 rounded-md">Áo kiểu Yuri Flower Top với họa tiết hoa độc đáo, chất liệu vải cao cấp, form dáng thoải mái phù hợp với nhiều dáng người. Sản phẩm phù hợp cho các dịp đi chơi, dạo phố hoặc đi làm.</textarea>
+                </div>
+                
+                <!-- Highlights -->
+                <div class="md:col-span-2">
+                  <label for="modalHighlights" class="block text-sm font-medium text-gray-700">Đặc điểm nổi bật</label>
+                  <textarea id="modalHighlights" rows="4" class="mt-1 p-2 w-full border border-gray-300 rounded-md">Chất liệu: 100% cotton cao cấp
+  Họa tiết hoa độc đáo
+  Kiểu dáng: Tay ngắn, cổ tròn
+  Xuất xứ: Việt Nam</textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button" onclick="saveModalChanges()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+            Lưu thay đổi
+          </button>
+          <button type="button" onclick="closeEditModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+            Hủy bỏ
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Function to open the edit modal
+    function openEditModal() {
+      document.getElementById('editProductModal').classList.remove('hidden');
+      // Populate modal fields with current values
+      document.getElementById('modalProductName').value = document.getElementById('productNameDisplay').textContent;
+      document.getElementById('modalProductCode').value = document.getElementById('productCodeDisplay').textContent;
+      document.getElementById('modalBrand').value = document.getElementById('brandDisplay').textContent;
+      document.getElementById('modalCategory').value = document.getElementById('categoryDisplay').textContent.toLowerCase();
+      document.getElementById('modalPrice').value = document.getElementById('priceDisplay').textContent.replace(/[^\d]/g, '');
+      document.getElementById('modalOldPrice').value = document.getElementById('oldPriceDisplay').textContent.replace(/[^\d]/g, '');
+      document.getElementById('modalDiscount').value = document.getElementById('discountDisplay').textContent.replace('%', '');
+      document.getElementById('modalStatus').value = document.getElementById('statusDisplay').textContent === 'Còn hàng' ? 'instock' : 
+                                                     document.getElementById('statusDisplay').textContent === 'Hết hàng' ? 'outofstock' : 'pending';
+      document.getElementById('modalStock').value = document.getElementById('stockDisplay').textContent;
+      document.getElementById('modalDescription').value = document.getElementById('descriptionDisplay').textContent.trim();
+      document.getElementById('modalHighlights').value = Array.from(document.getElementById('highlightDisplay').querySelectorAll('li')).map(li => li.textContent).join('\n');
+    }
+  
+    // Function to close the edit modal
+    function closeEditModal() {
+      document.getElementById('editProductModal').classList.add('hidden');
+    }
+  
+    // Function to save changes from modal
+    function saveModalChanges() {
+      // Get values from modal
+      const productName = document.getElementById('modalProductName').value;
+      const productCode = document.getElementById('modalProductCode').value;
+      const brand = document.getElementById('modalBrand').value;
+      const category = document.getElementById('modalCategory').value;
+      const price = document.getElementById('modalPrice').value;
+      const oldPrice = document.getElementById('modalOldPrice').value;
+      const discount = document.getElementById('modalDiscount').value;
+      const status = document.getElementById('modalStatus').value;
+      const stock = document.getElementById('modalStock').value;
+      const description = document.getElementById('modalDescription').value;
+      const highlights = document.getElementById('modalHighlights').value;
+  
+      // Update the main display
+      document.getElementById('productNameDisplay').textContent = productName;
+      document.getElementById('productCodeDisplay').textContent = productCode;
+      document.getElementById('brandDisplay').textContent = brand;
+      document.getElementById('categoryDisplay').textContent = category === 'ao' ? 'Áo' : 
+                                                            category === 'quan' ? 'Quần' : 
+                                                            category === 'vay' ? 'Váy' : 'Đầm';
+      document.getElementById('priceDisplay').textContent = formatCurrency(price);
+      document.getElementById('oldPriceDisplay').textContent = formatCurrency(oldPrice);
+      document.getElementById('discountDisplay').textContent = discount + '%';
+      document.getElementById('statusDisplay').textContent = status === 'instock' ? 'Còn hàng' : 
+                                                           status === 'outofstock' ? 'Hết hàng' : 'Đang nhập hàng';
+      document.getElementById('stockDisplay').textContent = stock;
+      document.getElementById('descriptionDisplay').textContent = description;
+      
+      // Update highlights as list items
+      const highlightList = highlights.split('\n').filter(item => item.trim() !== '');
+      const highlightHTML = `<ul class="list-disc pl-5 text-gray-700 space-y-1">${
+        highlightList.map(item => `<li>${item.trim()}</li>`).join('')
+      }</ul>`;
+      document.getElementById('highlightDisplay').innerHTML = highlightHTML;
+  
+      // Close the modal
+      closeEditModal();
+      
+      // Show success message
+      alert('Thông tin sản phẩm đã được cập nhật thành công!');
+    }
+  
+    // Helper function to format currency
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount).replace('₫', '') + '₫';
+    }
+  </script>
+  </body>
+</html>

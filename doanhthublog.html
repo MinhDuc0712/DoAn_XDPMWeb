@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thống kê doanh thu blog</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 p-5 font-sans">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">
+      Thống kê doanh thu
+    </h1>
+
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+      <div id="statistics-container">
+        <!-- Nội dung sẽ được thêm bởi JavaScript -->
+      </div>
+    </div>
+
+    <script>
+      // Dữ liệu giả lập cho doanh thu
+      const salesData = [
+        {
+          year: 2024,
+          month: "Tháng 1",
+          salesCount: 120,
+          totalRevenue: 2500000,
+        },
+        {
+          year: 2024,
+          month: "Tháng 2",
+          salesCount: 100,
+          totalRevenue: 2000000,
+        },
+        {
+          year: 2024,
+          month: "Tháng 3",
+          salesCount: 150,
+          totalRevenue: 3200000,
+        },
+        {
+          year: 2024,
+          month: "Tháng 4",
+          salesCount: 130,
+          totalRevenue: 2700000,
+        },
+      ];
+
+      // Hàm tính toán phần trăm thay đổi
+      function calculatePercentageChange(current, previous) {
+        if (previous === 0) return 0; // Tránh chia cho 0
+        return (((current - previous) / previous) * 100).toFixed(2); // Chuyển về số thập phân 2 chữ số
+      }
+
+      const container = document.getElementById("statistics-container");
+
+      for (let i = 0; i < salesData.length; i++) {
+        const item = salesData[i];
+
+        let percentChange = "";
+        if (i > 0) {
+          const previousRevenue = salesData[i - 1].totalRevenue;
+          const change = calculatePercentageChange(
+            item.totalRevenue,
+            previousRevenue
+          );
+          const changeClass = change >= 0 ? "text-green-600" : "text-red-600";
+          percentChange = `<div class="${changeClass} text-sm mt-2">Thay đổi so với tháng trước: ${change}%</div>`;
+        }
+
+        const statItem = document.createElement("div");
+        statItem.className = "border-b border-gray-200 py-4 last:border-0";
+        statItem.innerHTML = `
+                <div class="text-lg font-semibold text-blue-600 mb-3">${
+                  item.year
+                }/${item.month}</div>
+                <div class="text-gray-700">
+                    <span class="inline-block mr-6 mb-2"><span class="font-medium">Số lượt bán:</span> ${
+                      item.salesCount
+                    }</span>
+                    <span class="inline-block"><span class="font-medium">Tổng doanh thu:</span> ${item.totalRevenue.toLocaleString()} VND</span>
+                    ${percentChange}
+                </div>
+            `;
+        container.appendChild(statItem);
+      }
+    </script>
+  </body>
+</html>
