@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
+    <title>Chi tiết sản phẩm</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
@@ -18,136 +18,63 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <style>
-      .color-block {
-        display: block;
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        background-color: #f9fafb;
-        border-radius: 0.5rem;
-        border: 1px solid #e5e7eb;
-      }
-      .color-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.75rem;
-      }
-      .color-circle {
-        width: 1.5rem;
-        height: 1.5rem;
-        border-radius: 9999px;
-        margin-right: 0.75rem;
-        border: 1px solid #d1d5db;
-      }
-      .color-name {
-        font-weight: 600;
-        color: #374151;
-      }
-      .size-block {
-        display: inline-block;
-        margin-right: 0.75rem;
-        margin-bottom: 0.5rem;
-        padding: 0.5rem 1rem;
-        background-color: #e0e7ff;
-        border-radius: 0.375rem;
-        font-weight: 500;
-      }
-      .size-label {
-        color: #4f46e5;
-      }
-      .quantity-label {
-        color: #10b981;
-      }
-    </style>
   </head>
-  <body>
-    <!-- Sidebar and other content remains the same -->
-    
-    <div class="p-6 sm:ml-64 mt-10">
-        <div class="bg-white shadow-md rounded-lg p-6 flex flex-col md:flex-row space-x-16">
+  <body class="bg-gray-50 font-sans leading-relaxed">    
+    <div class="container mx-auto px-4 py-8">
+      <div class="bg-white shadow-md rounded-lg p-6 flex flex-col md:flex-row space-x-16">
           <!-- Product Image -->
           <div class="flex justify-center items-start md:w-1/2">
             <img
               src="image/YuriFlowerTop_Front.webp"
               alt="Ảnh sản phẩm"
-              class="w-full max-w-xs h-auto object-cover rounded-lg"
-            />
+              class="rounded-lg w-full max-w-md object-cover shadow-md"
+              />
           </div>
       
           <!-- Product Info -->
-          <div class="md:w-1/2 space-y-4">
-            <h2 class="text-2xl font-bold text-gray-800">Yuri Flower Top</h2>
-            <div class="text-gray-700 space-y-4">
-              <p><strong>Mã sản phẩm:</strong> SP001</p>
-              <p><strong>Danh mục:</strong> Áo nữ</p>
-              
-              <!-- Hiển thị Màu Sắc và Size/Số lượng tương ứng -->
-              <div>
-                <p class="font-medium mb-2">Thông tin tồn kho:</p>
-                
-                <!-- Màu trắng -->
-                <div class="color-block">
-                  <div class="color-header">
-                    <div class="color-circle bg-white"></div>
-                    <span class="color-name">Trắng</span>
-                  </div>
-                  <div>
-                    <div class="size-block">
-                      <span class="size-label">Size S:</span> 
-                      <span class="quantity-label">15</span>
-                    </div>
-                    <div class="size-block">
-                      <span class="size-label">Size M:</span> 
-                      <span class="quantity-label">10</span>
-                    </div>
-                    <div class="size-block">
-                      <span class="size-label">Size L:</span> 
-                      <span class="quantity-label">20</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Màu đen -->
-                <div class="color-block">
-                  <div class="color-header">
-                    <div class="color-circle bg-black"></div>
-                    <span class="color-name">Đen</span>
-                  </div>
-                  <div>
-                    <div class="size-block">
-                      <span class="size-label">Size S:</span> 
-                      <span class="quantity-label">8</span>
-                    </div>
-                    <div class="size-block">
-                      <span class="size-label">Size M:</span> 
-                      <span class="quantity-label">12</span>
-                    </div>
-                    <div class="size-block">
-                      <span class="size-label">Size XL:</span> 
-                      <span class="quantity-label">5</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Màu đỏ -->
-                <div class="color-block">
-                  <div class="color-header">
-                    <div class="color-circle bg-red-500"></div>
-                    <span class="color-name">Đỏ</span>
-                  </div>
-                  <div>
-                    <div class="size-block">
-                      <span class="size-label">Size M:</span> 
-                      <span class="quantity-label">7</span>
-                    </div>
-                    <div class="size-block">
-                      <span class="size-label">Size L:</span> 
-                      <span class="quantity-label">15</span>
-                    </div>
-                  </div>
+           <!-- Product Info -->
+        <div class="md:w-1/2 mt-6 md:mt-0 space-y-4">
+          <h2 class="text-3xl font-bold text-gray-800">Yuri Flower Top</h2>
+          <p class="text-gray-500">Mã sản phẩm: <span class="font-semibold text-gray-700">SP001</span></p>
+          <p class="text-gray-500">Danh mục: <span class="font-semibold text-gray-700">Áo nữ</span></p>
+
+          <!-- Thông tin tồn kho -->
+          <div class="mt-4">
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Thông tin tồn kho</h3>
+
+            <!-- Màu -->
+            <div class="space-y-4">
+              <!-- Màu Trắng -->
+              <div class="border rounded-lg p-4 bg-gray-50">
+                <p class="font-semibold text-gray-700 mb-2">Màu Trắng</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size S: 15</span>
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size M: 10</span>
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size L: 20</span>
                 </div>
               </div>
-              
+
+              <!-- Màu Đen -->
+              <div class="border rounded-lg p-4 bg-gray-50">
+                <p class="font-semibold text-gray-700 mb-2">Màu Đen</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size S: 8</span>
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size M: 12</span>
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size XL: 5</span>
+                </div>
+              </div>
+
+              <!-- Màu Đỏ -->
+              <div class="border rounded-lg p-4 bg-gray-50">
+                <p class="font-semibold text-gray-700 mb-2">Màu Đỏ</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size M: 7</span>
+                  <span class="bg-indigo-100 text-indigo-700 font-medium px-3 py-1 rounded-full">Size L: 15</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">    
               <p><strong>Giá:</strong> 1.200.000₫</p>
               <p><strong>Ưu đãi:</strong> 10% </p>
               <p><strong>Mô Tả:</strong> 
@@ -169,9 +96,9 @@
             
             <a href="admin_product.html">
               <button
-                class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                class="mt-6 px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200"
               >
-                Quay lại trang chủ
+                <i class="fas fa-arrow-left"></i> Quay lại trang chủ
               </button>
             </a>
           </div>
