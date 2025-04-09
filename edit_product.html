@@ -147,16 +147,17 @@
                             <div class="bg-gray-100 rounded-lg p-2 mb-2">
                                 <img id="mainProductImage" src="/api/placeholder/400/400" alt="Product" class="w-full h-64 object-cover rounded-lg">
                             </div>
-                            <input type="file" id="mainImageUpload" class="custom-file-input hidden" accept="image/*">
-                            <button type="button" onclick="document.getElementById('mainImageUpload').click()" class="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                                <i class="fas fa-upload mr-2"></i>Tải lên hình chính
-                            </button>
+                            <label for="mainImageUrl" class="block text-sm font-medium text-gray-700 mb-1">URL hình ảnh chính *</label>
+                            <input type="text" id="mainImageUrl" name="mainImageUrl" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" 
+                                   value="link hình ảnh" required
+                                   onchange="updateImagePreview('mainImageUrl', 'mainProductImage')">
+                            <img id="mainProductImagePreview" class="preview-image" alt="Preview">
                         </div>
                         
                         <!-- Thumbnails -->
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Hình ảnh phụ</label>
-                            <div class="grid grid-cols-4 gap-2 mb-2">
+                            <div id="thumbnailContainer" class="grid grid-cols-4 gap-2 mb-2">
                                 <div class="bg-gray-100 rounded-lg p-1 cursor-pointer border-2 border-blue-500">
                                     <img src="/api/placeholder/100/100" alt="Thumbnail" class="w-full h-16 object-cover rounded-lg">
                                 </div>
@@ -167,15 +168,15 @@
                                     <img src="/api/placeholder/100/100" alt="Thumbnail" class="w-full h-16 object-cover rounded-lg">
                                 </div>
                                 <div class="bg-gray-100 rounded-lg p-1 cursor-pointer">
-                                    <button type="button" class="w-full h-16 bg-gray-200 rounded-lg flex items-center justify-center text-gray-600 hover:bg-gray-300">
+                                    <button type="button" class="w-full h-16 bg-gray-200 rounded-lg flex items-center justify-center text-gray-600 hover:bg-gray-300" onclick="addThumbnailField()">
                                         <i class="fas fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
-                            <input type="file" id="thumbnailUpload" class="custom-file-input hidden" accept="image/*" multiple>
-                            <button type="button" onclick="document.getElementById('thumbnailUpload').click()" class="w-full py-2 px-4 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
-                                <i class="fas fa-plus mr-2"></i>Thêm hình phụ
-                            </button>
+                            
+                            <div id="thumbnailInputsContainer">
+                                <!-- Các input URL thumbnail sẽ được thêm vào đây -->
+                            </div>
                         </div>
                     </div>
                     
@@ -313,7 +314,6 @@ Xuất xứ: Việt Nam</textarea>
                                 <tr class="bg-white border-b hover:bg-gray-50">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            <div class="w-4 h-4 rounded-full bg-red-500 mr-2"></div>
                                             <span>Đỏ</span>
                                         </div>
                                     </td>
@@ -332,7 +332,6 @@ Xuất xứ: Việt Nam</textarea>
                                 <tr class="bg-white border-b hover:bg-gray-50">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            <div class="w-4 h-4 rounded-full bg-blue-500 mr-2"></div>
                                             <span>Xanh dương</span>
                                         </div>
                                     </td>
@@ -351,7 +350,6 @@ Xuất xứ: Việt Nam</textarea>
                                 <tr class="bg-white border-b hover:bg-gray-50">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
-                                            <div class="w-4 h-4 rounded-full bg-white border border-gray-300 mr-2"></div>
                                             <span>Trắng</span>
                                         </div>
                                     </td>
@@ -395,7 +393,6 @@ Xuất xứ: Việt Nam</textarea>
                     <label for="variantColor" class="block text-sm font-medium text-gray-700 mb-1 text-left">Màu sắc *</label>
                     <div class="flex">
                         <input type="text" id="variantColor" class="w-full p-3 border border-gray-300 rounded-l-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Tên màu" required>
-                        <input type="color" id="variantColorPicker" class="h-12 w-12 border border-gray-300 rounded-r-lg cursor-pointer" value="#ff0000">
                     </div>
                 </div>
                 
@@ -442,6 +439,7 @@ Xuất xứ: Việt Nam</textarea>
     
     <script>
         // Handle form submission
+        // Handle form submission
         document.getElementById('editProductForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -450,13 +448,92 @@ Xuất xứ: Việt Nam</textarea>
                 return;
             }
             
+            // Thu thập các URL hình ảnh
+            const mainImageUrl = document.getElementById('mainImageUrl').value;
+            const thumbnailUrls = [];
+            document.querySelectorAll('#thumbnailInputsContainer input[type="text"]').forEach(input => {
+                if (input.value) {
+                    thumbnailUrls.push(input.value);
+                }
+            });
+            
+            console.log('Main Image URL:', mainImageUrl);
+            console.log('Thumbnail URLs:', thumbnailUrls);
+            
             // Here you would typically send the form data to the server
             // For this example, we'll just show a success message
             alert('Sản phẩm đã được cập nhật thành công!');
-            
-            // You can redirect to the product list page or stay on this page
-            // window.location.href = '/products';
         });
+        
+        // Hàm cập nhật hình ảnh xem trước từ URL
+        function updateImagePreview(inputId, imageId) {
+            const url = document.getElementById(inputId).value;
+            if (url) {
+                document.getElementById(imageId).src = url;
+                
+                // Hiển thị preview (nếu có)
+                const previewId = imageId + 'Preview';
+                if (document.getElementById(previewId)) {
+                    const preview = document.getElementById(previewId);
+                    preview.src = url;
+                    preview.style.display = 'block';
+                }
+            }
+        }
+        
+        // Hàm thêm thumbnail mới
+        function addThumbnailField() {
+            const thumbnailIndex = document.querySelectorAll('#thumbnailInputsContainer .thumbnail-input').length;
+            
+            // Tạo input URL
+            const inputDiv = document.createElement('div');
+            inputDiv.className = 'thumbnail-input mb-2 flex items-center';
+            inputDiv.innerHTML = `
+                <input type="text" class="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" 
+                       placeholder="Nhập URL hình ảnh phụ" 
+                       id="thumbnailUrl${thumbnailIndex}"
+                       onchange="updateThumbnailPreview(${thumbnailIndex})">
+                <button type="button" class="ml-2 p-2 text-red-500 hover:text-red-700" onclick="removeThumbnailField(this, ${thumbnailIndex})">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            document.getElementById('thumbnailInputsContainer').appendChild(inputDiv);
+            
+            // Thêm ô preview vào container
+            const thumbnailContainer = document.getElementById('thumbnailContainer');
+            const thumbnails = thumbnailContainer.querySelectorAll('.bg-gray-100');
+            const lastThumbnail = thumbnails[thumbnails.length - 1];
+            
+            const newThumbnail = document.createElement('div');
+            newThumbnail.className = 'bg-gray-100 rounded-lg p-1 cursor-pointer thumbnail-preview';
+            newThumbnail.id = `thumbnailPreview${thumbnailIndex}`;
+            newThumbnail.innerHTML = `
+                <img src="/api/placeholder/100/100" alt="Thumbnail" class="w-full h-16 object-cover rounded-lg">
+            `;
+            
+            thumbnailContainer.insertBefore(newThumbnail, lastThumbnail);
+        }
+        
+        // Hàm cập nhật thumbnail preview
+        function updateThumbnailPreview(index) {
+            const url = document.getElementById(`thumbnailUrl${index}`).value;
+            if (url) {
+                const preview = document.getElementById(`thumbnailPreview${index}`).querySelector('img');
+                preview.src = url;
+            }
+        }
+        
+        // Hàm xóa thumbnail field
+        function removeThumbnailField(button, index) {
+            // Xóa input
+            button.closest('.thumbnail-input').remove();
+            
+            // Xóa preview
+            const preview = document.getElementById(`thumbnailPreview${index}`);
+            if (preview) {
+                preview.remove();
+            }
+        }
         
         // Form validation
         function validateForm() {
@@ -490,14 +567,13 @@ Xuất xứ: Việt Nam</textarea>
                 
                 // Fill form with existing data
                 const cells = currentEditingRow.cells;
-                const colorDiv = cells[0].querySelector('div');
+                // const colorDiv = cells[0].querySelector('div');
                 const colorName = cells[0].querySelector('span').textContent;
                 const size = cells[1].textContent;
                 const price = cells[2].textContent.replace(/[^\d]/g, '');
                 const stock = cells[3].textContent;
                 
                 document.getElementById('variantColor').value = colorName;
-                document.getElementById('variantColorPicker').value = getColorValue(colorDiv.style.backgroundColor);
                 document.getElementById('variantSize').value = size;
                 document.getElementById('variantPrice').value = price;
                 document.getElementById('variantStock').value = stock;
@@ -507,7 +583,6 @@ Xuất xứ: Việt Nam</textarea>
                 
                 // Reset form
                 document.getElementById('variantColor').value = '';
-                document.getElementById('variantColorPicker').value = '#ff0000';
                 document.getElementById('variantSize').value = 'M';
                 document.getElementById('variantPrice').value = '1200000';
                 document.getElementById('variantStock').value = '10';
@@ -523,7 +598,6 @@ Xuất xứ: Việt Nam</textarea>
         
         function saveVariant() {
             const color = document.getElementById('variantColor').value;
-            const colorValue = document.getElementById('variantColorPicker').value;
             const size = document.getElementById('variantSize').value;
             const price = document.getElementById('variantPrice').value;
             const stock = document.getElementById('variantStock').value;
@@ -557,7 +631,6 @@ Xuất xứ: Việt Nam</textarea>
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div class="w-4 h-4 rounded-full mr-2" style="background-color: ${colorValue}"></div>
-                            <span>${color}</span>
                         </div>
                     </td>
                     <td class="px-6 py-4">${size}</td>
