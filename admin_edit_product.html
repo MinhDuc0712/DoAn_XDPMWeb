@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chỉnh sửa sản phẩm</title>
+
+    <!-- Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Flowbite CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@1.5.0/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .custom-file-input::-webkit-file-upload-button {
+        visibility: hidden;
+      }
+      .custom-file-input::before {
+        content: "Chọn hình ảnh";
+        display: inline-block;
+        background: #3b82f6;
+        color: white;
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+        outline: none;
+        white-space: nowrap;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .custom-file-input:hover::before {
+        background: #2563eb;
+      }
+      .thumbnail-item {
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .thumbnail-item:hover {
+        transform: scale(1.03);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .thumbnail-input-container {
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 5px;
+        border-radius: 0.375rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Sidebar -->
+    <aside
+      class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+    >
+      <div
+        class="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200"
+      >
+        <div class="flex items-center justify-center mb-5">
+          <img src="/api/placeholder/160/40" alt="Logo" class="h-8" />
+        </div>
+        <ul class="space-y-2 font-medium">
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <i
+                class="fas fa-tachometer-alt text-gray-500 group-hover:text-gray-900 w-5 h-5"
+              ></i>
+              <span class="ml-3">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <i
+                class="fas fa-columns text-gray-500 group-hover:text-gray-900 w-5 h-5"
+              ></i>
+              <span class="flex-1 ml-3 whitespace-nowrap">Kanban</span>
+              <span
+                class="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full"
+                >Pro</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <i
+                class="fas fa-inbox text-gray-500 group-hover:text-gray-900 w-5 h-5"
+              ></i>
+              <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
+              <span
+                class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full"
+                >3</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <i
+                class="fas fa-users text-gray-500 group-hover:text-gray-900 w-5 h-5"
+              ></i>
+              <span class="flex-1 ml-3 whitespace-nowrap"
+                >Quản lý người dùng</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg bg-gray-100 group"
+            >
+              <i class="fas fa-box text-gray-900 w-5 h-5"></i>
+              <span class="flex-1 ml-3 whitespace-nowrap"
+                >Quản lý sản phẩm</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <i
+                class="fas fa-list text-gray-500 group-hover:text-gray-900 w-5 h-5"
+              ></i>
+              <span class="flex-1 ml-3 whitespace-nowrap"
+                >Quản lý danh mục</span
+              >
+            </a>
+          </li>
+          <hr class="my-2 border-gray-200" />
+          <li>
+            <a
+              href="#"
+              class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+            >
+              <i
+                class="fas fa-sign-out-alt text-gray-500 group-hover:text-gray-900 w-5 h-5"
+              ></i>
+              <span class="flex-1 ml-3 whitespace-nowrap">Đăng xuất</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="p-4 sm:ml-64">
+      <!-- Header -->
+      <div class="bg-white rounded-lg shadow-sm mb-4 p-4">
+        <div class="flex justify-between items-center">
+          <div>
+            <h1 class="text-xl font-semibold text-gray-800">
+              Chỉnh sửa sản phẩm
+            </h1>
+            <nav class="flex" aria-label="Breadcrumb">
+              <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                  <a
+                    href="#"
+                    class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-700"
+                  >
+                    <i class="fas fa-home mr-2"></i>
+                    Dashboard
+                  </a>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                    <a
+                      href="#"
+                      class="ml-1 text-sm font-medium text-blue-600 hover:text-blue-700 md:ml-2"
+                      >Quản lý sản phẩm</a
+                    >
+                  </div>
+                </li>
+                <li aria-current="page">
+                  <div class="flex items-center">
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                    <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2"
+                      >Chỉnh sửa sản phẩm</span
+                    >
+                  </div>
+                </li>
+              </ol>
+            </nav>
+          </div>
+          <div class="flex items-center space-x-4">
+            <button class="p-2 text-gray-500 rounded-full hover:bg-gray-100">
+              <i class="fas fa-bell"></i>
+            </button>
+            <button class="p-2 text-gray-500 rounded-full hover:bg-gray-100">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Product Form -->
+      <div class="bg-white rounded-lg shadow-sm p-6 mb-4">
+        <form id="editProductForm">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Left Column - Images -->
+            <div class="md:col-span-1">
+              <h2 class="text-lg font-semibold mb-4">Hình ảnh sản phẩm</h2>
+
+              <!-- Main Image -->
+              <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Hình ảnh chính</label
+                >
+                <div class="bg-gray-100 rounded-lg p-2 mb-2">
+                  <img
+                    id="mainProductImage"
+                    src="/api/placeholder/400/400"
+                    alt="Product"
+                    class="w-full h-64 object-cover rounded-lg"
+                  />
+                </div>
+                <label
+                  for="mainImageUrl"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >URL hình ảnh chính *</label
+                >
+                <input
+                  type="text"
+                  id="mainImageUrl"
+                  name="mainImageUrl"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  value="link hình ảnh"
+                  required
+                  onchange="updateImagePreview('mainImageUrl', 'mainProductImage')"
+                />
+                <img
+                  id="mainProductImagePreview"
+                  class="preview-image"
+                  alt="Preview"
+                />
+              </div>
+
+              <!-- Thumbnails -->
+              <div id="thumbnailContainer" class="grid grid-cols-4 gap-4 mb-4">
+                <!-- Thumbnail mẫu -->
+                <div class="thumbnail-item relative group">
+                  <div
+                    class="thumbnail-preview h-32 bg-gray-100 rounded-lg overflow-hidden border-2 border-blue-500 cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md"
+                    onclick="showThumbnailInput(this)"
+                  >
+                    <img
+                      src="/api/placeholder/300/300"
+                      alt="Thumbnail"
+                      class="w-full h-full object-cover"
+                    />
+                    <input type="hidden" class="thumbnail-url" value="" />
+                    <div
+                      class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center"
+                    >
+                      <i
+                        class="fas fa-edit text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-200"
+                      ></i>
+                    </div>
+                  </div>
+                  <div class="thumbnail-input hidden mt-2">
+                    <div class="flex items-center space-x-2">
+                      <input
+                        type="url"
+                        class="thumbnail-url-input flex-1 p-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Nhập URL hình ảnh"
+                      />
+                      <button
+                        type="button"
+                        onclick="saveThumbnail(this)"
+                        class="thumbnail-save p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                      >
+                        <i class="fas fa-check"></i>
+                      </button>
+                      <button
+                        type="button"
+                        onclick="cancelThumbnail(this)"
+                        class="thumbnail-cancel p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+                      >
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Nút thêm thumbnail mới -->
+                <div class="h-32 flex items-center justify-center">
+                  <button
+                    type="button"
+                    onclick="addThumbnail()"
+                    class="w-full h-full bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 hover:border-blue-500 hover:bg-gray-50 transition flex flex-col items-center justify-center text-gray-500 hover:text-blue-600"
+                  >
+                    <i class="fas fa-plus text-xl mb-1"></i>
+                    <span class="text-sm">Thêm ảnh</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Middle Column - Product Info -->
+            <div class="md:col-span-2">
+              <h2 class="text-lg font-semibold mb-4">Thông tin sản phẩm</h2>
+
+              <!-- Product Name -->
+              <div class="mb-4">
+                <label
+                  for="productName"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Tên sản phẩm *</label
+                >
+                <input
+                  type="text"
+                  id="productName"
+                  name="productName"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  value="Yuri Flower Top"
+                  required
+                />
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Product Code -->
+                <div>
+                  <label
+                    for="productCode"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Mã sản phẩm *</label
+                  >
+                  <input
+                    type="text"
+                    id="productCode"
+                    name="productCode"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    value="SP001"
+                    required
+                  />
+                </div>
+
+                <!-- Brand -->
+                <div>
+                  <label
+                    for="brand"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Thương hiệu *</label
+                  >
+                  <input
+                    type="text"
+                    id="brand"
+                    name="brand"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    value="Yuri"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <!-- Category -->
+                <div>
+                  <label
+                    for="category"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Danh mục *</label
+                  >
+                  <select
+                    id="category"
+                    name="category"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  >
+                    <option value="ao" selected>Áo</option>
+                    <option value="quan">Quần</option>
+                    <option value="vay">Váy</option>
+                    <option value="dam">Đầm</option>
+                  </select>
+                </div>
+
+                <!-- Status -->
+                <div>
+                  <label
+                    for="status"
+                    class="block text-sm font-medium text-gray-700 mb-1"
+                    >Trạng thái *</label
+                  >
+                  <select
+                    id="status"
+                    name="status"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    required
+                  >
+                    <option value="instock" selected>Còn hàng</option>
+                    <option value="outofstock">Hết hàng</option>
+                    <option value="pending">Đang nhập hàng</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-4">
+                <label
+                  for="description"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Mô tả sản phẩm *</label
+                >
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="4"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                  required
+                >
+Áo kiểu Yuri Flower Top với họa tiết hoa độc đáo, chất liệu vải cao cấp, form dáng thoải mái phù hợp với nhiều dáng người. Sản phẩm phù hợp cho các dịp đi chơi, dạo phố hoặc đi làm.</textarea
+                >
+              </div>
+
+              <!-- Highlights -->
+              <div class="mb-4">
+                <label
+                  for="highlights"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Đặc điểm nổi bật (mỗi dòng 1 đặc điểm)</label
+                >
+                <textarea
+                  id="highlights"
+                  name="highlights"
+                  rows="4"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                >
+Chất liệu: 100% cotton cao cấp
+Họa tiết hoa độc đáo
+Kiểu dáng: Tay ngắn, cổ tròn
+Xuất xứ: Việt Nam</textarea
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Pricing Section -->
+          <div class="mt-8 border-t border-gray-200 pt-6">
+            <h2 class="text-lg font-semibold mb-4">Giá cả & Tồn kho</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Price -->
+              <div class="mb-4">
+                <label
+                  for="price"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Giá bán *</label
+                >
+                <div class="relative">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <span class="text-gray-500">₫</span>
+                  </div>
+                  <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    class="w-full pl-8 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    value="1200000"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Original Price -->
+              <div class="mb-4">
+                <label
+                  for="originalPrice"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Giá gốc</label
+                >
+                <div class="relative">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                  >
+                    <span class="text-gray-500">₫</span>
+                  </div>
+                  <input
+                    type="number"
+                    id="originalPrice"
+                    name="originalPrice"
+                    class="w-full pl-8 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    value="1500000"
+                  />
+                </div>
+              </div>
+
+              <!-- Discount -->
+              <div class="mb-4">
+                <label
+                  for="discount"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                  >Giảm giá (%)</label
+                >
+                <div class="relative">
+                  <input
+                    type="number"
+                    id="discount"
+                    name="discount"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                    value="10"
+                    min="0"
+                    max="100"
+                  />
+                  <div
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+                  >
+                    <span class="text-gray-500">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stock -->
+            <div class="mb-4">
+              <label
+                for="stock"
+                class="block text-sm font-medium text-gray-700 mb-1"
+                >Số lượng tồn kho *</label
+              >
+              <input
+                type="number"
+                id="stock"
+                name="stock"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                value="100"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Variants Section -->
+          <div class="mt-8 border-t border-gray-200 pt-6">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-semibold">Màu, size, số lượng</h2>
+              <button
+                type="button"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                onclick="openVariantModal()"
+              >
+                <i class="fas fa-plus mr-2"></i>Thêm màu, size, số lượng
+              </button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-3">Màu sắc</th>
+                    <th scope="col" class="px-6 py-3">Kích thước</th>
+
+                    <th scope="col" class="px-6 py-3">Số lượng</th>
+                    <th scope="col" class="px-6 py-3">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4">
+                      <div class="flex items-center">
+                        <span>Đỏ</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">M</td>
+
+                    <td class="px-6 py-4">50</td>
+                    <td class="px-6 py-4">
+                      <button
+                        type="button"
+                        class="text-blue-600 hover:text-blue-900 mr-3"
+                        onclick="editVariant(this)"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="text-red-600 hover:text-red-900"
+                        onclick="deleteVariant(this)"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4">
+                      <div class="flex items-center">
+                        <span>Xanh dương</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">L</td>
+
+                    <td class="px-6 py-4">30</td>
+                    <td class="px-6 py-4">
+                      <button
+                        type="button"
+                        class="text-blue-600 hover:text-blue-900 mr-3"
+                        onclick="editVariant(this)"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="text-red-600 hover:text-red-900"
+                        onclick="deleteVariant(this)"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  <tr class="bg-white border-b hover:bg-gray-50">
+                    <td class="px-6 py-4">
+                      <div class="flex items-center">
+                        <span>Trắng</span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">XL</td>
+
+                    <td class="px-6 py-4">20</td>
+                    <td class="px-6 py-4">
+                      <button
+                        type="button"
+                        class="text-blue-600 hover:text-blue-900 mr-3"
+                        onclick="editVariant(this)"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="text-red-600 hover:text-red-900"
+                        onclick="deleteVariant(this)"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div
+            class="mt-8 border-t border-gray-200 pt-6 flex justify-end space-x-3"
+          >
+            <button
+              type="button"
+              class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
+            >
+              <i class="fas fa-times mr-2"></i>Hủy bỏ
+            </button>
+            <button
+              type="submit"
+              class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              <i class="fas fa-save mr-2"></i>Lưu thay đổi
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Variant Modal -->
+    <div
+      id="variantModal"
+      class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+    >
+      <div
+        class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
+      >
+        <div class="mt-3 text-center">
+          <h3
+            class="text-lg leading-6 font-medium text-gray-900 mb-4"
+            id="variantModalTitle"
+          >
+            Thêm biến thể mới
+          </h3>
+
+          <div class="mb-4">
+            <label
+              for="variantColor"
+              class="block text-sm font-medium text-gray-700 mb-1 text-left"
+              >Màu sắc *</label
+            >
+            <div class="flex">
+              <select
+                id="variantColor"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                required
+              >
+                <option value="">-- Chọn màu sắc --</option>
+                <option value="Đỏ">Đỏ</option>
+                <option value="Xanh dương">Xanh dương</option>
+                <option value="Trắng">Trắng</option>
+                <option value="Đen">Đen</option>
+                <option value="Vàng">Vàng</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label
+              for="variantSize"
+              class="block text-sm font-medium text-gray-700 mb-1 text-left"
+              >Kích thước *</label
+            >
+            <select
+              id="variantSize"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              required
+            >
+              <option value="">-- Chọn kích thước --</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label
+              for="variantStock"
+              class="block text-sm font-medium text-gray-700 mb-1 text-left"
+              >Số lượng *</label
+            >
+            <input
+              type="number"
+              id="variantStock"
+              class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+              value="10"
+              required
+            />
+          </div>
+
+          <div class="items-center px-4 py-3">
+            <button
+              id="cancelVariantBtn"
+              type="button"
+              class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md mr-2 hover:bg-gray-400"
+            >
+              Hủy bỏ
+            </button>
+            <button
+              id="saveVariantBtn"
+              type="button"
+              class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+            >
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flowbite JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@1.5.0/dist/flowbite.js"></script>
+
+    <script>
+      // Handle form submission
+      document
+        .getElementById("editProductForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Validate form
+          if (!validateForm()) {
+            return;
+          }
+
+          // Thu thập các URL hình ảnh
+          const mainImageUrl = document.getElementById("mainImageUrl").value;
+          const thumbnailUrls = [];
+          document
+            .querySelectorAll('#thumbnailInputsContainer input[type="text"]')
+            .forEach((input) => {
+              if (input.value) {
+                thumbnailUrls.push(input.value);
+              }
+            });
+
+          console.log("Main Image URL:", mainImageUrl);
+          console.log("Thumbnail URLs:", thumbnailUrls);
+
+          // Here you would typically send the form data to the server
+          // For this example, we'll just show a success message
+          alert("Sản phẩm đã được cập nhật thành công!");
+        });
+
+      // Hàm cập nhật hình ảnh xem trước từ URL
+      function updateImagePreview(inputId, imageId) {
+        const url = document.getElementById(inputId).value;
+        if (url) {
+          document.getElementById(imageId).src = url;
+
+          // Hiển thị preview (nếu có)
+          const previewId = imageId + "Preview";
+          if (document.getElementById(previewId)) {
+            const preview = document.getElementById(previewId);
+            preview.src = url;
+            preview.style.display = "block";
+          }
+        }
+      }
+
+      // Hàm thêm thumbnail mới
+      function addThumbnail() {
+        const container = document.getElementById("thumbnailContainer");
+        const thumbnailCount =
+          container.querySelectorAll(".thumbnail-item").length;
+
+        const newThumbnail = document.createElement("div");
+        newThumbnail.className = "thumbnail-item relative group";
+        newThumbnail.innerHTML = `
+        <div class="thumbnail-preview h-32 bg-gray-100 rounded-lg overflow-hidden border border-gray-200 cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md" onclick="showThumbnailInput(this)">
+            <img src="/api/placeholder/300/300" alt="Thumbnail" class="w-full h-full object-cover">
+            <input type="hidden" class="thumbnail-url" value="">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+                <i class="fas fa-edit text-white opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-200"></i>
+            </div>
+        </div>
+        <div class="thumbnail-input hidden mt-2">
+            <div class="flex items-center space-x-2">
+                <input type="url" class="thumbnail-url-input flex-1 p-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập URL hình ảnh">
+                <button type="button" class="thumbnail-save p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button type="button" class="thumbnail-cancel p-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    `;
+
+        // Chèn trước nút thêm
+        container.insertBefore(newThumbnail, container.lastElementChild);
+
+        // Tự động mở input để nhập
+        setTimeout(() => {
+          const preview = newThumbnail.querySelector(".thumbnail-preview");
+          showThumbnailInput(preview);
+        }, 100);
+      }
+
+      // Hàm cập nhật thumbnail preview
+      function updateThumbnailPreview(index) {
+        const url = document.getElementById(`thumbnailUrl${index}`).value;
+        if (url) {
+          const preview = document
+            .getElementById(`thumbnailPreview${index}`)
+            .querySelector("img");
+          preview.src = url;
+        }
+      }
+
+      // Hàm xóa thumbnail field
+      function removeThumbnailField(button, index) {
+        // Xóa input
+        button.closest(".thumbnail-input").remove();
+
+        // Xóa preview
+        const preview = document.getElementById(`thumbnailPreview${index}`);
+        if (preview) {
+          preview.remove();
+        }
+      }
+
+      // Form validation
+      function validateForm() {
+        const requiredFields = [
+          "productName",
+          "productCode",
+          "brand",
+          "category",
+          "description",
+          "price",
+          "stock",
+        ];
+
+        let hasThumbnail = false;
+        document
+          .querySelectorAll('input[id^="thumbnailUrl"]')
+          .forEach((input) => {
+            if (input.value.trim()) {
+              hasThumbnail = true;
+            }
+          });
+
+        if (!hasThumbnail) {
+          alert("Vui lòng thêm ít nhất 1 hình ảnh phụ");
+          return false;
+        }
+
+        return true;
+      }
+
+      // Variant Modal Functions
+      let currentEditingRow = null;
+
+      function openVariantModal(editMode = false, row = null) {
+        const modal = document.getElementById("variantModal");
+        const title = document.getElementById("variantModalTitle");
+
+        if (editMode && row) {
+          title.textContent = "Chỉnh sửa biến thể";
+          currentEditingRow = row.closest("tr");
+
+          // Fill form with existing data
+          const cells = currentEditingRow.cells;
+          // const colorDiv = cells[0].querySelector('div');
+          const colorName = cells[0].querySelector("span").textContent;
+          const size = cells[1].textContent;
+
+          const stock = cells[3].textContent;
+
+          document.getElementById("variantColor").value = colorName;
+          document.getElementById("variantSize").value = size;
+
+          document.getElementById("variantStock").value = stock;
+        } else {
+          title.textContent = "Thêm biến thể mới";
+          currentEditingRow = null;
+
+          // Reset form
+          document.getElementById("variantColor").value = "";
+          document.getElementById("variantSize").value = "";
+
+          document.getElementById("variantStock").value = "";
+        }
+
+        modal.classList.remove("hidden");
+      }
+
+      function closeVariantModal() {
+        document.getElementById("variantModal").classList.add("hidden");
+        currentEditingRow = null;
+      }
+
+      function saveVariant() {
+        const color = document.getElementById("variantColor").value;
+        const size = document.getElementById("variantSize").value;
+        const stock = document.getElementById("variantStock").value;
+
+        if (!color || !size || !price || !stock) {
+          alert("Vui lòng điền đầy đủ thông tin biến thể");
+          return;
+        }
+
+        const formattedPrice =
+          new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" })
+            .format(price)
+            .replace("₫", "") + "₫";
+
+        if (currentEditingRow) {
+          // Update existing row
+          const cells = currentEditingRow.cells;
+
+          // Update color cell
+          const colorDiv = cells[0].querySelector("div");
+          cells[0].querySelector("span").textContent = color;
+
+          // Update other cells
+          cells[1].textContent = size;
+          cells[2].textContent = stock;
+        } else {
+          // Add new row
+          const tbody = document.querySelector("table tbody");
+          const newRow = document.createElement("tr");
+          newRow.className = "bg-white border-b hover:bg-gray-50";
+          newRow.innerHTML = `
+                    <td class="px-6 py-4">
+                        <div class="flex items-center">
+                            <span>${color}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">${size}</td>
+                    <td class="px-6 py-4">${stock}</td>
+                    <td class="px-6 py-4">
+                        <button type="button" class="text-blue-600 hover:text-blue-900 mr-3" onclick="editVariant(this)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button type="button" class="text-red-600 hover:text-red-900" onclick="deleteVariant(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+          tbody.appendChild(newRow);
+        }
+
+        closeVariantModal();
+      }
+
+      function editVariant(button) {
+        openVariantModal(true, button);
+      }
+
+      function deleteVariant(button) {
+        if (confirm("Bạn có chắc chắn muốn xóa biến thể này?")) {
+          button.closest("tr").remove();
+        }
+      }
+
+      // Event listeners for variant modal
+      document
+        .getElementById("cancelVariantBtn")
+        .addEventListener("click", closeVariantModal);
+      document
+        .getElementById("saveVariantBtn")
+        .addEventListener("click", saveVariant);
+
+      function showThumbnailInput(thumbnailElement) {
+        // Ẩn tất cả input đang mở
+        document.querySelectorAll(".thumbnail-input").forEach((input) => {
+          input.classList.add("hidden");
+        });
+
+        // Hiển thị input của thumbnail được click
+        const inputContainer = thumbnailElement.nextElementSibling;
+        inputContainer.classList.remove("hidden");
+
+        // Focus vào input
+        const input = inputContainer.querySelector(".thumbnail-url-input");
+        input.focus();
+
+        // Đặt URL hiện tại vào input nếu có
+        const url = thumbnailElement.querySelector(".thumbnail-url").value;
+        if (url) {
+          input.value = url;
+        }
+      }
+      // Hàm lưu thumbnail
+      function saveThumbnail(button) {
+        const inputContainer = button.closest(".thumbnail-input");
+        const previewContainer = inputContainer.previousElementSibling;
+        const input = inputContainer.querySelector(".thumbnail-url-input");
+        const hiddenInput = previewContainer.querySelector(".thumbnail-url");
+        const img = previewContainer.querySelector("img");
+
+        if (input.value && isValidUrl(input.value)) {
+          img.src = input.value;
+          hiddenInput.value = input.value;
+          inputContainer.classList.add("hidden");
+        } else {
+          alert("Vui lòng nhập URL hình ảnh hợp lệ");
+          input.focus();
+        }
+      }
+
+      // Hàm hủy bỏ chỉnh sửa
+      function cancelThumbnail(button) {
+        const inputContainer = button.closest(".thumbnail-input");
+        inputContainer.classList.add("hidden");
+      }
+      // Hàm kiểm tra URL hợp lệ (giữ nguyên)
+      function isValidUrl(string) {
+        try {
+          new URL(string);
+          return true;
+        } catch (_) {
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
